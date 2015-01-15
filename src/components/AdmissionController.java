@@ -5,16 +5,18 @@ import interfaces.AdmissionControllerI;
 import java.util.ArrayList;
 
 import ports.AdmissionControllerInboundPort;
+import ports.AdmissionControllerOutboundPort;
 import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.ports.PortI;
 
 public class AdmissionController extends AbstractComponent implements AdmissionControllerI{
 	//public static final String admissionControllerURI = "admission-controller-URI";
 	private ArrayList<String> listeMVdispos;
-	private Computer computer;
+	private ArrayList<String> listeComputer;
 	private ArrayList<String> listeApplication;
+	private ArrayList<AdmissionControllerOutboundPort> cop;
 	
-	public AdmissionController(String admissionControllerURI, ArrayList<String> uriComputer){
+	public AdmissionController(String admissionControllerURI, ArrayList<String> uriComputer) throws Exception{
 		super(true,true);
 		//addofferedInterface pour le centre de calcul et le RG, création de port, addport, localpublishport
 		addOfferedInterface(AdmissionControllerI.class);
@@ -26,12 +28,14 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//On définit que un MV a deux coeurs
-		for(int i=0;i<computer.getCoeurs().size();i++){
-			
+		cop = new ArrayList<AdmissionControllerOutboundPort>();
+		AdmissionControllerOutboundPort p; 
+		for (int i = 0; i<uriComputer.size();i++){
+			p = new AdmissionControllerOutboundPort(uriComputer.get(i),this);
+			addPort(p);
+			p.localPublishPort();
+			cop.add(p);
 		}
-		//création des mv
-		
 	}
 	
 	/***
@@ -41,6 +45,8 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 	 * @throws Exception
 	 */
 	public String accept(int RequestGeneratorID)throws Exception{
+		
+		
 		//verifier les mvdispos
 		//on fixe le meme nombre de MV pour chaque appli (2MV par appli)
 		//on enleve les mv de la listeMVdispos

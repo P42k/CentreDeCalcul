@@ -19,7 +19,7 @@ public class AdmissionControllerInboundPort extends AbstractInboundPort implemen
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public String accept(int requestGeneratorId) throws Exception {
+	public String accept(final int requestGeneratorId) throws Exception {
 		final AdmissionController ac = (AdmissionController) this.owner;
 		return ac.handleRequestSync(
 				new ComponentService<String>() {
@@ -31,7 +31,7 @@ public class AdmissionControllerInboundPort extends AbstractInboundPort implemen
 	}
 	
 	@Override
-	public void finish(String applicationURI) throws Exception{
+	public void finish(final String applicationURI) throws Exception{
 		final AdmissionController ac = (AdmissionController) this.owner;
 		ac.handleRequestSync(
 				new ComponentService<String>() {
