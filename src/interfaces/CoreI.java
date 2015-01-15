@@ -14,12 +14,6 @@ public interface CoreI extends OfferedI, RequiredI {
 	public void	requestTreatment(Request r) throws Exception ;
 	
 	/**
-	 * Retourne la disponibilité du coeur pour traiter une requête
-	 * @return b boolean
-	 */
-	public boolean isFree();
-	
-	/**
 	 * Met à jour la fréquence du coeur
 	 * @param frequence double représentant la fréquence du coeur à choisir dans l'enum Frequence
 	 */

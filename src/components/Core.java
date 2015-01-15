@@ -15,8 +15,6 @@ public class Core extends AbstractComponent implements CoreI{
 	
 	/** fréquence du coeur */
 	private double frequence;
-	/** Booléen indiquant si le coeur est en train de traiter une requête */
-	private boolean isFree;
 	/** Booléen indiquant si une machine virtuelle tourne sur ce coeur */
 	private boolean usedByVM;
 	/** the output port used to send requests to the service of VirtualMachine  */
@@ -32,7 +30,6 @@ public class Core extends AbstractComponent implements CoreI{
 	 */
 	public Core(double frequence, String uri)throws Exception{
 		super(true,true);
-		this.isFree = true;
 		this.usedByVM=false;
 
 		this.frequence = frequence;
@@ -71,13 +68,6 @@ public class Core extends AbstractComponent implements CoreI{
 		assert frequence !=0.0;
 		this.frequence = frequence;
 	}
-
-	/** Retourne la valeur de l'attribut isFree: si le coeur est occupé par une requête ou non
-	 * @return boolean
-	 */
-	public boolean isFree(){
-		return this.isFree;
-	}
 	
 	/** Retourne la valeur de l'attribut usedByMV: si le coeur est alloué à une machine virtuelle ou non
 	 * @return boolean
@@ -100,9 +90,7 @@ public class Core extends AbstractComponent implements CoreI{
 	 */
 	public void requestTreatment(Request r) throws Exception {
 		System.out.println("début traitement requete de " + r.getUri());
-		this.isFree = false;
 		Thread.sleep((long)(r.getProcessingTime()/this.frequence));
-		this.isFree = true;
 		System.out.println("fin traitement requete de " + r.getUri());
 	}
 	

@@ -22,15 +22,6 @@ public class VirtualMachineOutboundPort extends AbstractOutboundPort implements 
 		((CoreI)this.connector).requestTreatment(r);
 	}
 	
-	/**
-	 * Vérifie si le coeur est occupé ou non
-	 * @return boolean
-	 */
-	public boolean isFree()
-	{
-		return ((CoreI)this.connector).isFree();
-	}
-
 
 	@Override
 	public void setFrequence(double frequence) {

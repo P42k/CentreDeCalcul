@@ -24,13 +24,6 @@ public class CoreInboundPort extends AbstractInboundPort implements CoreI {
 		c.requestTreatment(r);
 	}
 
-	/** Appelle la méthode isFree() du composant Coeur */
-	@Override
-	public boolean isFree() {
-		final Core c = (Core) this.owner;
-		return c.isFree();
-	}
-
 	/** Appelle la méthode setFréquence du composant Coeur */
 	@Override
 	public void setFrequence(double frequence) {
