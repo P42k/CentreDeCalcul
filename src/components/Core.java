@@ -42,6 +42,7 @@ public class Core extends AbstractComponent implements CoreI{
 		this.cp = new CoreInboundPort(uri,this);
 		this.addPort(this.cp) ;
 		this.cp.localPublishPort() ;
+		System.out.println("Le coeur "+ uri + " a été créé.");
 		
 		
 	}

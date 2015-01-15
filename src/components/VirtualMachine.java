@@ -68,6 +68,7 @@ public class VirtualMachine extends AbstractComponent {
 			q.localPublishPort();
 			this.listeCoeurs.add(q);
 		}
+		System.out.println("Machine virtuelle créée.");
 
 	}
 
@@ -136,6 +137,7 @@ public class VirtualMachine extends AbstractComponent {
 		for (int i=0; i<listeCoeurs.size();i++){
 			try{
 				this.listeCoeurs.get(i).doConnection(listeURICoeur.get(i),"connectors.VMCoreConnector");
+				System.out.println("Connexion de la machine virtuelle avec le coeur " + listeURICoeur.get(i));
 			}catch(Exception e){
 				System.err.println("Connection impossible avec le coeur " + listeURICoeur.get(i));
 			}

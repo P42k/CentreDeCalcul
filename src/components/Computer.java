@@ -32,6 +32,8 @@ public class Computer extends AbstractComponent {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("L'ordinateur " + id + "a été créé.");
+
 	}
 
 	/** Récupère la liste des coeurs de l'ordinateur 

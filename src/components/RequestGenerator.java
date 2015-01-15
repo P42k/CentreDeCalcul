@@ -52,7 +52,7 @@ public class RequestGenerator extends AbstractComponent {
 			acop.localPublishPort();
 			//le RG a besoin de RequestRepartitorI pour utiliser le répartiteur de requetes
 			this.addRequiredInterface(RequestRepartitorI.class);
-			
+			System.out.println("Générateur de requête créé.");
 		}
 	
 	@Override
@@ -63,6 +63,7 @@ public class RequestGenerator extends AbstractComponent {
 			acop.doConnection(admissionControllerURI, AdmissionControllerConnector.class.getCanonicalName());
 			//on récupère l'uri de l'application pour se connecter au répartiteur correspondant
 			applicationURI = acop.accept(requestGeneratorId);
+			System.out.println("Connexion du générateur de requêtes au contrôleur d'admission effectuée.");
 		} catch (Exception e3) {
 			e3.printStackTrace();
 		}
@@ -70,6 +71,7 @@ public class RequestGenerator extends AbstractComponent {
 			rrop = new RequestGeneratorRROutBoundPort(applicationURI, this);
 			addPort(rrop);
 			rrop.localPublishPort();
+			System.out.println("Connexion du générateur de requêtes à l'application effectuée.");
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
@@ -77,6 +79,8 @@ public class RequestGenerator extends AbstractComponent {
 		try {
 			//Connexion avec le répartiteur de requete
 			rrop.doConnection(applicationURI, RequestRepartitorConnector.class.getCanonicalName());
+			System.out.println("Connexion du générateur de requêtesau répartiteur de requêtes effectuée.");
+
 		} catch (Exception e1) {
 			System.err.println("RequestGenerator : Connexion avec le RequestRepartitor impossible !");
 			e1.printStackTrace();
