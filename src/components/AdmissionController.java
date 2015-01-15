@@ -12,7 +12,7 @@ import fr.upmc.components.ports.PortI;
 
 public class AdmissionController extends AbstractComponent implements AdmissionControllerI{
 	//public static final String admissionControllerURI = "admission-controller-URI";
-	private ArrayList<String> listeMVdispos;
+	private ArrayList<VirtualMachine> listeMV;
 	private ArrayList<String> listeComputer;
 	private ArrayList<String> listeApplication;
 	private ArrayList<AdmissionControllerOutboundPort> cop;
@@ -31,6 +31,8 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 			e.printStackTrace();
 		}
 		listeComputer = uriComputer;
+		listeMV = new ArrayList<VirtualMachine>();
+		createVirtualMachines();
 		cop = new ArrayList<AdmissionControllerOutboundPort>();
 		AdmissionControllerOutboundPort p; 
 		for (int i = 0; i<uriComputer.size();i++){
@@ -65,12 +67,12 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 		//on crée une application V
 		//on l'ajoute dans la listeApplication;
 		//on retourne l'uri de celle ci
-		if(listeMVdispos.size()>=4){
-			ArrayList<String> tmpVm=new ArrayList<String>();
-			tmpVm.add(listeMVdispos.remove(0));
-			tmpVm.add(listeMVdispos.remove(0));
-			tmpVm.add(listeMVdispos.remove(0));
-			tmpVm.add(listeMVdispos.remove(0));
+		if(listeMV.size()>=4){
+			ArrayList<VirtualMachine> tmpVm=new ArrayList<VirtualMachine>();
+			tmpVm.add(listeMV.remove(0));
+			tmpVm.add(listeMV.remove(0));
+			tmpVm.add(listeMV.remove(0));
+			tmpVm.add(listeMV.remove(0));
 		}
 		String auri = "application_"+applicationId;
 		applicationId++;
@@ -86,22 +88,47 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 	}
 	
 	/**
-	 * Va créer les machines virtuelles
+	 * Va créer les machines virtuelles. Par convention une machine virtuelle a 4 coeurs
 	 * @param nb nombre de machines virtuelles à créer
 	 */
-	public void createVirtualMachines(int nb){
+	public void createVirtualMachines(){
+//		VirtualMachine mv;
+//		ArrayList<String> coeursUri;
+//		for(int i=0;i<nb;i++){
+//			coeursUri=cop.get(i).getAvailableCores();
+//			try {
+//				mv=new VirtualMachine(coeursUri, null, "VM"+i, false);
+//				listeMVdispos.add("VM"+i);
+//			} catch (Exception e) {
+//				System.out.println("Impossible de créer la machine VM"+i);
+//				e.printStackTrace();
+//			}
+//		}
+		int cpt = 0;
 		VirtualMachine mv;
-		ArrayList<String> coeursUri;
-		for(int i=0;i<nb;i++){
-			coeursUri=cop.get(i).getAvailableCores();
+		ArrayList<String> tmp = new ArrayList<String>();
+		for(int i=0;i<cop.size();i++){
+			ArrayList<String> coeursUri=cop.get(i).getAvailableCores();
 			try {
-				mv=new VirtualMachine(coeursUri, null, "VM"+i, false);
-				listeMVdispos.add("VM"+i);
+				while(!coeursUri.isEmpty()){
+					if(cpt%4!=0||cpt==0){
+						tmp.add(coeursUri.remove(cpt));
+					}else{
+						mv=new VirtualMachine(tmp, null, "VM_"+cpt/4, false);
+						listeMV.add(mv);
+						tmp =  new ArrayList<String>();
+					}
+				}
 			} catch (Exception e) {
 				System.out.println("Impossible de créer la machine VM"+i);
 				e.printStackTrace();
 			}
 		}
+		
 	}
+	
+	
+	
+	
 	
 }
