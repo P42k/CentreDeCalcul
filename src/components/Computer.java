@@ -24,7 +24,9 @@ public class Computer extends AbstractComponent {
 		for (int i = 0; i<nbCores; i++){
 			uriCore = "Core"+i;
 			try {
-				cores.add(new Core(Frequence.F20.getFrequence(),uriCore));
+				Core c= new Core(Frequence.F20.getFrequence(),uriCore);
+				cores.add(c);
+				this.innerComponents.add(c);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
