@@ -16,9 +16,11 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 	private ArrayList<String> listeComputer;
 	private ArrayList<String> listeApplication;
 	private ArrayList<AdmissionControllerOutboundPort> cop;
+	private int applicationId;
 	
 	public AdmissionController(String admissionControllerURI, ArrayList<String> uriComputer) throws Exception{
 		super(true,true);
+		applicationId = 0;
 		//addofferedInterface pour le centre de calcul et le RG, création de port, addport, localpublishport
 		addOfferedInterface(AdmissionControllerI.class);
 		try {
@@ -26,7 +28,6 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 			addPort(acip);
 			acip.localPublishPort();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		listeComputer = uriComputer;
@@ -45,7 +46,6 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 			try {
 				cop.get(i).doConnection(listeComputer.get(i), ComputerConnector.class.getCanonicalName());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -59,17 +59,26 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 	 * @throws Exception
 	 */
 	public String accept(int RequestGeneratorID)throws Exception{
-		
-		
-		//verifier les mvdispos
-		//on fixe le meme nombre de MV pour chaque appli (2MV par appli)
-		//on enleve les mv de la listeMVdispos
-		//on crée une application
-		//on l'ajoute dans la listeApplication
+		//verifier les mvdispos V
+		//on fixe le meme nombre de MV pour chaque appli (2MV par appli)V
+		//on enleve les mv de la listeMVdisposV
+		//on crée une application V
+		//on l'ajoute dans la listeApplication;
 		//on retourne l'uri de celle ci
-		return null;
+		if(listeMVdispos.size()>=4){
+			ArrayList<String> tmpVm=new ArrayList<String>();
+			tmpVm.add(listeMVdispos.remove(0));
+			tmpVm.add(listeMVdispos.remove(0));
+			tmpVm.add(listeMVdispos.remove(0));
+			tmpVm.add(listeMVdispos.remove(0));
+		}
+		String auri = "application_"+applicationId;
+		applicationId++;
+		listeApplication.add(auri);
+
+		return auri;
 	}
-	
+
 	public void finish(String uriApplication)throws Exception{
 		//enlever de la liste
 		//désalloués les MV
