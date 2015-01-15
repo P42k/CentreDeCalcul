@@ -47,14 +47,14 @@ public class Computer extends AbstractComponent {
 		this.cores = cores;
 	}
 
-	/** fonction retournant la liste des coeurs disponibles dans l'ordinateur
-	 * @return ArrayList<Core>
+	/** fonction retournant la liste des uri des coeurs disponibles dans l'ordinateur
+	 * @return ArrayList<String>
 	 */
-	public ArrayList<Core> getAvailableCores(){
-		ArrayList<Core> list= new ArrayList<Core>();
+	public ArrayList<String> getAvailableCores(){
+		ArrayList<String> list= new ArrayList<String>();
 		for(int i=0; i<this.cores.size();i++){
 			if(!this.cores.get(i).getUsedByVM()){
-				list.add(this.cores.get(i));
+				list.add(this.cores.get(i).getUri());
 			}
 		}
 		return list;
