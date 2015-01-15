@@ -36,8 +36,6 @@ public class VirtualMachine extends AbstractComponent {
 	
 
 
-
-
 	/**
 	 * Crée une machine virtuelle
 	 * @param listeURICoeur

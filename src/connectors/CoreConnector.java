@@ -7,7 +7,7 @@ import fr.upmc.components.connectors.AbstractConnector;
 
 /**
  * La classe <code>VMCoreConnector</code> implémente un connecteur entre
- * les interfaces <code>VirtualMachine</code> et <code>CoreI</code>.
+ * les interfaces <code>VirtualMachineI</code> et <code>CoreI</code>.
  */
 public class CoreConnector extends AbstractConnector implements VirtualMachineI{
 

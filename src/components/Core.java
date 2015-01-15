@@ -71,13 +71,13 @@ public class Core extends AbstractComponent implements CoreI{
 	}
 	
 
-	/** Réalise le traitement d'une requête par le coeur
+	/** Réalise le traitement d'une requête par le coeur suivant la fréquence du coeur
 	 * @param Request
 	 */
 	public void requestTreatment(Request r) throws Exception {
 		System.out.println("début traitement requete");
 		this.isFree = false;
-		Thread.sleep(r.getProcessingTime());
+		Thread.sleep((long)(r.getProcessingTime()/this.frequence));
 		this.isFree = true;
 		System.out.println("fin traitement requete");
 	}

@@ -64,7 +64,6 @@ public class RequestGenerator extends AbstractComponent {
 			//on récupère l'uri de l'application pour se connecter au répartiteur correspondant
 			applicationURI = acop.accept(requestGeneratorId);
 		} catch (Exception e3) {
-			// TODO Auto-generated catch block
 			e3.printStackTrace();
 		}
 		try {
@@ -72,7 +71,6 @@ public class RequestGenerator extends AbstractComponent {
 			addPort(rrop);
 			rrop.localPublishPort();
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		
@@ -153,7 +151,6 @@ public class RequestGenerator extends AbstractComponent {
 			rrop.doDisconnection();
 			acop.doDisconnection();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
