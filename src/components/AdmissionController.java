@@ -62,4 +62,16 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 		//remettre les mv dans la listeMVdispos
 	}
 	
+	/**
+	 * Va créer les machines virtuelles
+	 * @param nb nombre de machines virtuelles à créer
+	 */
+	public void createVirtualMachines(int nb){
+		VirtualMachine mv;
+		for(int i=0;i<nb;i++){
+			listeComputer.get(i)
+			mv=new VirtualMachine(listeURICoeur, null, "VM"+i, false);
+		}
+	}
+	
 }

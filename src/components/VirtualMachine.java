@@ -138,7 +138,7 @@ public class VirtualMachine extends AbstractComponent {
 		super.start();
 		for (int i=0; i<listeCoeurs.size();i++){
 			try{
-				this.listeCoeurs.get(i).doConnection(listeURICoeur.get(i),"connectors.VMCoreConnector");
+				this.listeCoeurs.get(i).doConnection(listeURICoeur.get(i),"connectors.CoreConnector");
 				System.out.println("Connexion de la machine virtuelle "+mvUri +" avec le coeur " + listeURICoeur.get(i));
 			}catch(Exception e){
 				System.err.println("Connection impossible avec le coeur " + listeURICoeur.get(i));
