@@ -148,8 +148,8 @@ public class RequestGenerator extends AbstractComponent {
 	//appeler le controleur d'admission pour arreter l'application dans 
 	private void stop() {
 		System.out.println("Le RequestGenerator" + requestGeneratorId + "demande la terminaison de l'application");
-		acop.finish(requestGeneratorId);
 		try {
+			acop.finish(applicationURI);
 			rrop.doDisconnection();
 			acop.doDisconnection();
 		} catch (Exception e) {

@@ -5,13 +5,14 @@ import interfaces.RequestRepartitorI;
 import java.util.ArrayList;
 
 import ports.RequestRepartitorInboundPort;
+import ports.VirtualMachineOutboundPort;
 import ressources.Request;
 import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.ports.PortI;
 
 public class RequestRepartitor extends AbstractComponent {
 	private int mvcourante; //garde l'indice de la mv courante
-	private ArrayList<MVport> listeMV;
+	private ArrayList<VirtualMachineOutboundPort> listeMV;
 	private String uriApplication; //va permettre que le répartiteur de requete soit retrouvé par le RG
 	
 	/**

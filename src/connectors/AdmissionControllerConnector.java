@@ -4,10 +4,10 @@ import interfaces.AdmissionControllerI;
 import fr.upmc.components.connectors.AbstractConnector;
 
 public class AdmissionControllerConnector extends AbstractConnector{
-	public String accept(int requestGeneratorID){
+	public String accept(int requestGeneratorID) throws Exception{
 		return ((AdmissionControllerI)offering).accept(requestGeneratorID);
 	}
-	public void finish(int requestGeneratorID){
-		((AdmissionControllerI)offering).finish(requestGeneratorID);
+	public void finish(String applicationURI) throws Exception{
+		((AdmissionControllerI)offering).finish(applicationURI);
 	}
 }

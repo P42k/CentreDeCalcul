@@ -80,7 +80,7 @@ public class VirtualMachine extends AbstractComponent {
 		// recherche un coeur libre dans la liste des coeurs reliés
 		for(int idCoeur=0;idCoeur<listeCoeurs.size();idCoeur++){
 			if(listeCoeurs.get(idCoeur).isFree()){
-				listeCoeurs.get(idCoeur).requestTreatment(this.requestsQueue.remove());
+				listeCoeurs.get(idCoeur).traitementRequete(this.requestsQueue.remove());
 				break;
 			}
 		}
