@@ -4,6 +4,7 @@ import interfaces.AdmissionControllerI;
 
 import java.util.ArrayList;
 
+import connectors.ComputerConnector;
 import ports.AdmissionControllerInboundPort;
 import ports.AdmissionControllerOutboundPort;
 import fr.upmc.components.AbstractComponent;
@@ -28,6 +29,7 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		listeComputer = uriComputer;
 		cop = new ArrayList<AdmissionControllerOutboundPort>();
 		AdmissionControllerOutboundPort p; 
 		for (int i = 0; i<uriComputer.size();i++){
@@ -37,6 +39,18 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 			cop.add(p);
 		}
 	}
+	
+	public void start(){
+		for(int i=0; i<listeComputer.size();i++){
+			try {
+				cop.get(i).doConnection(listeComputer.get(i), ComputerConnector.class.getCanonicalName());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	
 	/***
 	 * 
