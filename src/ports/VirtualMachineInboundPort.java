@@ -2,9 +2,7 @@ package ports;
 
 import interfaces.VirtualMachineI;
 import ressources.Request;
-
 import components.VirtualMachine;
-
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ports.AbstractInboundPort;
 
@@ -25,6 +23,20 @@ public class VirtualMachineInboundPort extends AbstractInboundPort implements Vi
 		final VirtualMachine vm = (VirtualMachine) this.owner ;
 		vm.traitementRequete(requete);
 
+	}
+
+	/** Appelle la méthode de récupération de l'uri de l'application du composant Machine Virtuelle */
+	@Override
+	public String getIdApplication() {
+		final VirtualMachine vm = (VirtualMachine) this.owner ;
+		return vm.getIdApplication();
+	}
+
+	/** Appelle la méthode setIdApplication du composant Machine Virtuelle */
+	@Override
+	public void setIdApplication(String idApplication) {
+		final VirtualMachine vm = (VirtualMachine) this.owner ;
+		vm.setIdApplication(idApplication);
 	}
 		
 }

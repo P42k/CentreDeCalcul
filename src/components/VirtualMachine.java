@@ -25,8 +25,8 @@ import fr.upmc.components.ports.PortI;
 public class VirtualMachine extends AbstractComponent {
 	/** Liste des ports de la VM connecté aux coeurs						*/
 	private ArrayList<VirtualMachineOutboundPort> listeCoeurs;
-	/** Identifiant de l'application en cours sur la VM 					*/
-	private int idApplication;
+	/** Uri de l'application en cours sur la VM 					*/
+	private String idApplication;
 	/**Liste des URIs des coeurs avec lesquels la MV va communiquer			*/
 	private ArrayList<String> listeURICoeur;
 	/** La file des requêtes en attente de traitement 						*/
@@ -46,7 +46,7 @@ public class VirtualMachine extends AbstractComponent {
 	 * @param isDistributed booléen définissant si la machine virtuelle est distribuée
 	 * @throws Exception
 	 */
-	public VirtualMachine(ArrayList<String> listeURICoeur, int idApp, String MVPortURI,
+	public VirtualMachine(ArrayList<String> listeURICoeur, String idApp, String MVPortURI,
 			boolean isDistributed) throws Exception{
 		//ajout de la méthode offeredInterface, création port qui fournit la machine virtuelle, addport
 		//crée des ports qui requiert coeur, de les ajouter au composant puis à listeCoeurs
@@ -157,6 +157,21 @@ public class VirtualMachine extends AbstractComponent {
 		super.shutdown();
 	}
 
+	/**
+	 * Récupère l'id de l'application à qui a été allouée la machine virtuelle
+	 * @return uri de l'applicaton à qui a été allouée la MV
+	 */
+	public String getIdApplication() {
+		return idApplication;
+	}
+
+	/**
+	 * Met à jour l'id de l'appli à qui est allouée la MV
+	 * @param idApplication uri de l'application
+	 */
+	public void setIdApplication(String idApplication) {
+		this.idApplication = idApplication;
+	}
 
 	
 }
