@@ -63,7 +63,7 @@ public class RequestGenerator extends AbstractComponent {
 			acop.doConnection(admissionControllerURI, AdmissionControllerConnector.class.getCanonicalName());
 			//on récupère l'uri de l'application pour se connecter au répartiteur correspondant
 			applicationURI = acop.accept(requestGeneratorId);
-			System.out.println("Connexion du générateur de requêtes au contrôleur d'admission effectuée.");
+			System.out.println("Connexion du générateur de requêtes au contrôleur d'admission"+admissionControllerURI+ "effectuée.");
 		} catch (Exception e3) {
 			e3.printStackTrace();
 		}

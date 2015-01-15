@@ -99,11 +99,11 @@ public class Core extends AbstractComponent implements CoreI{
 	 * @throws Exception
 	 */
 	public void requestTreatment(Request r) throws Exception {
-		System.out.println("début traitement requete");
+		System.out.println("début traitement requete de " + r.getUri());
 		this.isFree = false;
 		Thread.sleep((long)(r.getProcessingTime()/this.frequence));
 		this.isFree = true;
-		System.out.println("fin traitement requete");
+		System.out.println("fin traitement requete de " + r.getUri());
 	}
 	
 	

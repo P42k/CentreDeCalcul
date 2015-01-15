@@ -33,6 +33,8 @@ public class VirtualMachine extends AbstractComponent {
 	protected BlockingQueue<Request> requestsQueue;
 	/** la liste des états des coeurs */
 	private ArrayList<CoreStatus> ce;
+	/** Uri de la machine virtuelle */
+	private String mvUri;
 	
 
 
@@ -53,7 +55,7 @@ public class VirtualMachine extends AbstractComponent {
 		this.listeURICoeur=listeURICoeur;
 		this.requestsQueue = new LinkedBlockingQueue<Request>() ;
 		ce = new ArrayList<CoreStatus>();
-		
+		this.mvUri=MVPortURI;
 		this.addOfferedInterface(VirtualMachineI.class);
 		PortI p = new VirtualMachineInboundPort(MVPortURI, this);
 		this.addPort(p);
@@ -68,7 +70,7 @@ public class VirtualMachine extends AbstractComponent {
 			q.localPublishPort();
 			this.listeCoeurs.add(q);
 		}
-		System.out.println("Machine virtuelle créée.");
+		System.out.println("Machine virtuelle "+ mvUri+ " créée.");
 
 	}
 
@@ -96,7 +98,7 @@ public class VirtualMachine extends AbstractComponent {
 				return;
 			}
 		}
-		System.out.println("la requete" + requete.getUri() + "est en attente");
+		System.out.println("la requete" + requete.getUri() + "est en attente dans la machine virtuelle " + mvUri);
 	}
 	
 	/***
@@ -137,7 +139,7 @@ public class VirtualMachine extends AbstractComponent {
 		for (int i=0; i<listeCoeurs.size();i++){
 			try{
 				this.listeCoeurs.get(i).doConnection(listeURICoeur.get(i),"connectors.VMCoreConnector");
-				System.out.println("Connexion de la machine virtuelle avec le coeur " + listeURICoeur.get(i));
+				System.out.println("Connexion de la machine virtuelle "+mvUri +" avec le coeur " + listeURICoeur.get(i));
 			}catch(Exception e){
 				System.err.println("Connection impossible avec le coeur " + listeURICoeur.get(i));
 			}
