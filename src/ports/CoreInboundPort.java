@@ -17,24 +17,28 @@ public class CoreInboundPort extends AbstractInboundPort implements CoreI {
 
 	private static final long serialVersionUID = 1L;
 
+	/** Appelle la méthode de traitement de requête du composant Coeur */
 	@Override
 	public void requestTreatment(Request r) throws Exception {
 		final Core c = (Core) this.owner;
 		c.requestTreatment(r);
 	}
 
+	/** Appelle la méthode isFree() du composant Coeur */
 	@Override
 	public boolean isFree() {
 		final Core c = (Core) this.owner;
 		return c.isFree();
 	}
 
+	/** Appelle la méthode setFréquence du composant Coeur */
 	@Override
 	public void setFrequence(double frequence) {
 		final Core c = (Core) this.owner;
 		c.setFrequence(frequence);
 	}
 
+	/** Appelle la méthode getFrequence du composant Coeur */
 	@Override
 	public double getFrequence() {
 		final Core c = (Core) this.owner;

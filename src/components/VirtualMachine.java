@@ -38,10 +38,10 @@ public class VirtualMachine extends AbstractComponent {
 
 	/**
 	 * Crée une machine virtuelle
-	 * @param listeURICoeur
-	 * @param idApp
-	 * @param MVPortURI
-	 * @param isDistributed
+	 * @param listeURICoeur liste des uris des coeurs
+	 * @param idApp identifiant de l'application
+	 * @param MVPortURI uri du port de la machine virtuelle
+	 * @param isDistributed booléen définissant si la machine virtuelle est distribuée
 	 * @throws Exception
 	 */
 	public VirtualMachine(ArrayList<String> listeURICoeur, int idApp, String MVPortURI,
@@ -73,7 +73,7 @@ public class VirtualMachine extends AbstractComponent {
 
 	/**
 	 * rajoute la requête dans la file d'attente et traite la requête en faisant appel à un coeur libre
-	 * @param requete
+	 * @param requete la requête qui arrive à la machine virtuelle
 	 * @throws Exception
 	 */
 	public void traitementRequete(Request requete) throws Exception{
@@ -100,7 +100,7 @@ public class VirtualMachine extends AbstractComponent {
 	
 	/***
 	 * va lancer le traitement sur le coeur
-	 * @param coreId
+	 * @param coreId index
 	 * @throws Exception
 	 */
 	private void treatment(int coreId) throws Exception{

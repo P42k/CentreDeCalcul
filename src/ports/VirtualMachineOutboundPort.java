@@ -5,6 +5,7 @@ import ressources.Request;
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ports.AbstractOutboundPort;
 
+/** outbound port du composant machine virtuelle */
 public class VirtualMachineOutboundPort extends AbstractOutboundPort implements CoreI{
 
 	public VirtualMachineOutboundPort(String uri, ComponentI owner) throws Exception {

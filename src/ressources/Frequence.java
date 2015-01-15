@@ -1,6 +1,6 @@
 package ressources;
 
-/** Enumération des fréquences possibles */
+/** Enumération des fréquences possibles pour les coeurs */
 public enum Frequence {
 	F14(1.4),
 	F16(1.6),
@@ -14,10 +14,12 @@ public enum Frequence {
 	
 	private double frequence;
 	
+	/**  crée une fréquence */
 	private Frequence(double freq){
 		this.frequence=freq;
 	}
 	
+	/** récupère la valeur d'une fréquence */
 	public double getFrequence(){
 		return this.frequence;
 	}

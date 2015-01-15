@@ -7,33 +7,26 @@ import fr.upmc.components.interfaces.RequiredI;
 public interface CoreI extends OfferedI, RequiredI {
 
 	/**
-	 * treat a new request .
-	 * 
-	 * <p><strong>Contract</strong></p>
-	 * 
-	 * <pre>
-	 * pre	r != null
-	 * post	true			// no postcondition.
-	 * </pre>
-	 *
-	 * @param r				request to be serviced.
+	 * Traitement d'une requête
+	 * @param r	requête à traiter
 	 * @throws Exception	
 	 */
 	public void	requestTreatment(Request r) throws Exception ;
 	
 	/**
-	 * 
-	 * 
+	 * Retourne la disponibilité du coeur pour traiter une requête
+	 * @return b boolean
 	 */
-	
 	public boolean isFree();
+	
 	/**
-	 * 
-	 * 
+	 * Met à jour la fréquence du coeur
+	 * @param frequence double représentant la fréquence du coeur à choisir dans l'enum Frequence
 	 */
 	public void setFrequence(double frequence);
-	/**
-	 * 
+	
+	/** Met à jour la fréquence du coeur 
+	 * @param frequence double
 	 */
 	public double getFrequence();
 	

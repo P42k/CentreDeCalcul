@@ -49,14 +49,14 @@ public class Core extends AbstractComponent implements CoreI{
 	
 
 
-	/** Réupère la fréquence
+	/** Réupère la fréquence du coeur
 	 * @return frequence double
 	 *  */
 	public double getFrequence() {
 		return frequence;
 	}
 	
-	/** Récupère l'URI 
+	/** Récupère l'URI du coeur
 	 * @return String
 	 * */
 	public String getUri(){
@@ -94,7 +94,7 @@ public class Core extends AbstractComponent implements CoreI{
 	
 
 	/** Réalise le traitement d'une requête par le coeur suivant la fréquence du coeur
-	 * @param r Request
+	 * @param r Request requête à traiter
 	 * @throws Exception
 	 */
 	public void requestTreatment(Request r) throws Exception {

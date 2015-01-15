@@ -8,6 +8,7 @@ import components.VirtualMachine;
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ports.AbstractInboundPort;
 
+/** Inbound port du composant machine virtuelle */
 public class VirtualMachineInboundPort extends AbstractInboundPort implements VirtualMachineI {
 
 	private static final long serialVersionUID = 1L;
@@ -18,7 +19,7 @@ public class VirtualMachineInboundPort extends AbstractInboundPort implements Vi
 	}
 	
 	/**
-	 * Appelle la méthode de traitement de requête de la Machine Virtuelle
+	 * Appelle la méthode de traitement de requête du composant Machine Virtuelle
 	 */
 	public void traitementRequete(Request requete) throws Exception {
 		final VirtualMachine vm = (VirtualMachine) this.owner ;

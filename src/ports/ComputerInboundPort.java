@@ -21,12 +21,14 @@ public class ComputerInboundPort  extends AbstractInboundPort implements Compute
 	private static final long serialVersionUID = 1L;
 
 	
+	/** Appelle la méthode setAvailableCore du composant Ordinateur */
 	@Override
 	public void setAvailableCore(String uriCore, boolean b) {
 		final Computer c = (Computer)  this.owner;
 		c.setAvailableCore(uriCore, b);
 	}
 
+	/** Appelle la méthode getAvailableCores du composant Ordinateur */
 	@Override
 	public ArrayList<String> getAvailableCores() {
 		final Computer c = (Computer)  this.owner;
