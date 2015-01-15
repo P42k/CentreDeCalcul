@@ -19,7 +19,7 @@ import fr.upmc.components.ports.PortI;
 /** VirtualMachine implante un composant qui simule une machine virtuelle */
 
 
-//TODO : la file d'attente, sa gestion et le shutdown. A voir pour les détails dans ServiceProvider.java de 
+//TODO : le shutdown. A voir pour les détails dans ServiceProvider.java de 
 // SingleServerEventBasedSimulation
 
 public class VirtualMachine extends AbstractComponent {
@@ -54,11 +54,13 @@ public class VirtualMachine extends AbstractComponent {
 		this.idApplication=idApp;
 		this.listeURICoeur=listeURICoeur;
 		this.requestsQueue = new LinkedBlockingQueue<Request>() ;
-
+		ce = new ArrayList<CoreStatus>();
+		
 		this.addOfferedInterface(VirtualMachineI.class);
 		PortI p = new VirtualMachineInboundPort(MVPortURI, this);
 		this.addPort(p);
 		p.localPublishPort();
+		
 		this.addRequiredInterface(CoreI.class);
 		VirtualMachineOutboundPort q;
 		for(int i=0; i<this.listeURICoeur.size();i++){
@@ -88,17 +90,43 @@ public class VirtualMachine extends AbstractComponent {
 //				break;
 //			}
 //		}
-		
 		requestsQueue.add(requete);
 		for(int i=0; i<listeURICoeur.size(); i++){
-			if(ce.get(i).getIsFree().get()){
-				Request r = requestsQueue.remove();
-				System.out.println("la requete" + requete.getUri() + "est en attende");
+			if(ce.get(i).isFree()){
+				treatment(i);
 				return;
 			}
 		}
+		System.out.println("la requete" + requete.getUri() + "est en attente");
+	}
+	
+	/***
+	 * va lancer le traitement sur le coeur
+	 * @param coreId
+	 * @throws Exception
+	 */
+	private void treatment(int coreId) throws Exception{
+		Request r = requestsQueue.remove();
+		ce.get(coreId).requestTreatment(r);
+		finishTreatment();
 	}
 
+	/***
+	 * permet de relancer le traitement de requetes si il reste des requetes 
+	 * dans la file d'attente.
+	 * @throws Exception
+	 */
+	private void finishTreatment() throws Exception {
+		if (!requestsQueue.isEmpty()){
+			for(int i=0; i<ce.size();i++){
+				if(ce.get(i).isFree()){
+					treatment(i);
+					return;
+				}
+			}
+		}
+		
+	}
 
 	/**
 	 * Sert à effectuer la connexion des ports recquis 
@@ -113,7 +141,9 @@ public class VirtualMachine extends AbstractComponent {
 			}catch(Exception e){
 				System.err.println("Connection impossible avec le coeur " + listeURICoeur.get(i));
 			}
-
+		}
+		for(int j = 0; j< listeCoeurs.size(); j++){
+			ce.add(new CoreStatus(listeCoeurs.get(j)));
 		}
 	}
 
