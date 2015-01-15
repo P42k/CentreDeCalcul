@@ -82,9 +82,16 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 	 */
 	public void createVirtualMachines(int nb){
 		VirtualMachine mv;
+		ArrayList<String> coeursUri;
 		for(int i=0;i<nb;i++){
-			listeComputer.get(i)
-			mv=new VirtualMachine(listeURICoeur, null, "VM"+i, false);
+			coeursUri=cop.get(i).getAvailableCores();
+			try {
+				mv=new VirtualMachine(coeursUri, null, "VM"+i, false);
+				listeMVdispos.add("VM"+i);
+			} catch (Exception e) {
+				System.out.println("Impossible de créer la machine VM"+i);
+				e.printStackTrace();
+			}
 		}
 	}
 	
