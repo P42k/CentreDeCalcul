@@ -26,8 +26,9 @@ public class Core extends AbstractComponent implements CoreI{
 	
 	/**
 	 * Crée un coeur grâce à sa fréquence et son uri. Le coeur est initialement libre.
-	 * @param double
-	 * @param String 
+	 * @param frequence double fréquence du coeur
+	 * @param String uri du coeur
+	 * @throws Exception
 	 */
 	public Core(double frequence, String uri)throws Exception{
 		super(true,true);
@@ -48,31 +49,53 @@ public class Core extends AbstractComponent implements CoreI{
 	
 
 
+	/** Réupère la fréquence
+	 * @return frequence double
+	 *  */
 	public double getFrequence() {
 		return frequence;
 	}
 	
+	/** Récupère l'URI 
+	 * @return String
+	 * */
 	public String getUri(){
 		return this.uri;
 	}
 
-
+	/** Met à jour la fréquence du coeur 
+	 * @param frequence double
+	 */
 	public void setFrequence(double frequence) {
 		assert frequence !=0.0;
 		this.frequence = frequence;
 	}
 
+	/** Retourne la valeur de l'attribut isFree: si le coeur est occupé par une requête ou non
+	 * @return boolean
+	 */
 	public boolean isFree(){
 		return this.isFree;
 	}
 	
+	/** Retourne la valeur de l'attribut usedByMV: si le coeur est alloué à une machine virtuelle ou non
+	 * @return boolean
+	 */
 	public boolean getUsedByVM(){
 		return this.usedByVM;
 	}
 	
+	/** Met à jour la valeur de l'occupation du coeur par une machine virtuelle
+	 * @param b boolean
+	 */
+	public void setUsedByVM(boolean b){
+		this.usedByVM=b;
+	}
+	
 
 	/** Réalise le traitement d'une requête par le coeur suivant la fréquence du coeur
-	 * @param Request
+	 * @param r Request
+	 * @throws Exception
 	 */
 	public void requestTreatment(Request r) throws Exception {
 		System.out.println("début traitement requete");

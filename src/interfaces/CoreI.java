@@ -19,7 +19,7 @@ public interface CoreI extends OfferedI, RequiredI {
 	 * @param r				request to be serviced.
 	 * @throws Exception	
 	 */
-	public void			requestTreatment(Request r) throws Exception ;
+	public void	requestTreatment(Request r) throws Exception ;
 	
 	/**
 	 * 

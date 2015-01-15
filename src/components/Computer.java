@@ -1,7 +1,6 @@
 package components;
 
 import java.util.ArrayList;
-
 import ressources.Frequence;
 import fr.upmc.components.AbstractComponent;
 
@@ -14,7 +13,9 @@ public class Computer extends AbstractComponent {
 	private int id;
 
 	/** Crée un ordinateur avec le nombre de Coeur passé en paramètres
-	 * @param int */
+	 * @param int nombre de Coeurs
+	 * @param int id de l'oridnateur
+	 * */
 	public Computer(int nbCores, int id){
 		//innercomponents des coeurs
 		cores = new ArrayList<Core>(nbCores);
@@ -34,21 +35,21 @@ public class Computer extends AbstractComponent {
 	}
 
 	/** Récupère la liste des coeurs de l'ordinateur 
-	 *@return ArrayList<Core>
+	 *@return ArrayList<Core> liste de coeur
 	 **/
 	public ArrayList<Core> getCores() {
 		return cores;
 	}
 
 	/** Met à jour la liste des Coeurs avec les coeurs de l'ordinateur avec la liste passée en paramètre 
-	 * @param ArrayList<Core>
+	 * @param ArrayList<Core> liste de coeur
 	 * */
 	public void setCores(ArrayList<Core> cores) {
 		this.cores = cores;
 	}
 
-	/** fonction retournant la liste des uri des coeurs disponibles dans l'ordinateur
-	 * @return ArrayList<String>
+	/** Fonction retournant la liste des uri des coeurs disponibles dans l'ordinateur
+	 * @return ArrayList<String> liste des uris des coeurs disponibles
 	 */
 	public ArrayList<String> getAvailableCores(){
 		ArrayList<String> list= new ArrayList<String>();
@@ -59,6 +60,18 @@ public class Computer extends AbstractComponent {
 		}
 		return list;
 	}
-	
-	
+
+	/** Fonction permettant de mettre un coeur occupé par une machine virtuelle ou non
+	 * @param uriCore String uri du coeur
+	 * @param boolean disponibilité du coeur
+	 */
+	public void setAvailableCore(String uriCore, boolean b){
+		Core c;
+		for(int i=0;i<this.cores.size();i++){
+			c=this.cores.get(i);
+			if(c.getUri()==uriCore){
+				c.setUsedByVM(b);
+			}
+		}
+	}
 }
