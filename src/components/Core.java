@@ -4,7 +4,7 @@ import interfaces.CoreI;
 
 import java.rmi.RemoteException;
 
-import ports.CorePort;
+import ports.CoreInboundPort;
 import ressources.Request;
 import fr.upmc.components.AbstractComponent;
 
@@ -18,7 +18,7 @@ public class Core extends AbstractComponent implements CoreI{
 	private boolean isFree;
 	static int coeurId=0;
 	/** the output port used to send requests to the service of VirtualMachine  */
-	private CorePort cp;
+	private CoreInboundPort cp;
 	
 	/*
 	 * create a Core component
@@ -36,8 +36,8 @@ public class Core extends AbstractComponent implements CoreI{
 		this.frequence = frequence;
 		
 		// Component management
-		this.addRequiredInterface(RequestArrivalI.class) ;
-		this.cp = new CorePort(outboundPortURI,this);
+		this.addRequiredInterface(CoreI.class) ;
+		this.cp = new CoreInboundPort(outboundPortURI,this);
 		this.addPort(this.cp) ;
 		this.cp.localPublishPort() ;
 		

@@ -1,4 +1,4 @@
-package connectors;
+package ports;
 
 import components.AdmissionController;
 import interfaces.AdmissionControllerI;

@@ -4,7 +4,7 @@ import interfaces.AdmissionControllerI;
 
 import java.util.ArrayList;
 
-import connectors.AdmissionControllerInboundPort;
+import ports.AdmissionControllerInboundPort;
 import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.ports.PortI;
 

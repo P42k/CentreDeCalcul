@@ -33,14 +33,12 @@ public class VirtualMachineOutboundPort extends AbstractOutboundPort implements 
 
 	@Override
 	public void setFrequence(double frequence) {
-		// TODO Auto-generated method stub
-		
+		((CoreI)this.connector).setFrequence(frequence);;
 	}
 
 	@Override
 	public double getFrequence() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ((CoreI)this.connector).getFrequence();
 	}
 		
 }

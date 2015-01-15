@@ -9,6 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import ports.VirtualMachineInboundPort;
 import ports.VirtualMachineOutboundPort;
+import ressources.CoreStatus;
 import ressources.Request;
 import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.exceptions.ComponentShutdownException;
@@ -29,7 +30,10 @@ public class VirtualMachine extends AbstractComponent {
 	/**Liste des URIs des coeurs avec lesquels la MV va communiquer			*/
 	private ArrayList<String> listeURICoeur;
 	/** La file des requêtes en attente de traitement 						*/
-	protected BlockingQueue<Request> requestsQueue ;
+	protected BlockingQueue<Request> requestsQueue;
+	/** la liste des états des coeurs */
+	private ArrayList<CoreStatus> ce;
+	
 
 
 
@@ -73,15 +77,24 @@ public class VirtualMachine extends AbstractComponent {
 	 * @throws Exception
 	 */
 	public void traitementRequete(Request requete) throws Exception{
-		// ajouter dans la file
-		this.requestsQueue.add(requete);
-		System.out.println("Ajout de la requête " + requete + "à la file d'attente.");
+//		// ajouter dans la file
+//		this.requestsQueue.add(requete);
+//		System.out.println("Ajout de la requête " + requete + "à la file d'attente.");
+//		
+//		// recherche un coeur libre dans la liste des coeurs reliés
+//		for(int idCoeur=0;idCoeur<listeCoeurs.size();idCoeur++){
+//			if(listeCoeurs.get(idCoeur).isFree()){
+//				listeCoeurs.get(idCoeur).requestTreatment(this.requestsQueue.remove());
+//				break;
+//			}
+//		}
 		
-		// recherche un coeur libre dans la liste des coeurs reliés
-		for(int idCoeur=0;idCoeur<listeCoeurs.size();idCoeur++){
-			if(listeCoeurs.get(idCoeur).isFree()){
-				listeCoeurs.get(idCoeur).requestTreatment(this.requestsQueue.remove());
-				break;
+		requestsQueue.add(requete);
+		for(int i=0; i<listeURICoeur.size(); i++){
+			if(ce.get(i).getIsFree().get()){
+				Request r = requestsQueue.remove();
+				System.out.println("la requete" + requete.getUri() + "est en attende");
+				return;
 			}
 		}
 	}

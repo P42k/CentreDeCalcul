@@ -34,6 +34,10 @@ import java.io.Serializable;
 
 		/** unique identifier of the request, for tracing purposes.				*/
 		protected int		uri ;
+		public int getUri() {
+			return uri;
+		}
+
 		/** time required to execute the request.								*/
 		protected long		processingTime ;
 		/** time at which it has been received by the service provider.			*/
