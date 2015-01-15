@@ -5,7 +5,7 @@ import ressources.Request;
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ports.AbstractOutboundPort;
 
-public class RequestGeneratorRROutBoundPort extends AbstractOutboundPort implements RequestRepartitorI{
+public class RequestGeneratorRROutBoundPort extends AbstractOutboundPort {
 
 	public RequestGeneratorRROutBoundPort(String outboundPortURI,
 			ComponentI owner) throws Exception {

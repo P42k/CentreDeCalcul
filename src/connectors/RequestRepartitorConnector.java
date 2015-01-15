@@ -6,7 +6,7 @@ import interfaces.RequestRepartitorI;
 
 public class RequestRepartitorConnector extends AbstractConnector{
 
-	public void acceptRequest(Request request) throws Exception{
+	public void acceptRequest(Request request){
 		((RequestRepartitorI)offering).acceptRequest(request);
 	}
 }

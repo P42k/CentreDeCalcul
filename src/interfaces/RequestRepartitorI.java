@@ -1,9 +1,8 @@
 package interfaces;
 
 import ressources.Request;
-import fr.upmc.components.interfaces.OfferedI;
 
-public interface RequestRepartitorI extends OfferedI {
+public interface RequestRepartitorI {
 
-	public void acceptRequest(Request request) throws Exception;
+	public void acceptRequest(Request request);
 }
