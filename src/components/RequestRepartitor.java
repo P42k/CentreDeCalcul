@@ -60,11 +60,18 @@ public class RequestRepartitor extends AbstractComponent {
 		
 		System.out.println("Request Repartitor a été crée ");
 	}
-	
-	public void repartition(Request requete){
-		//TODO va répartir la requete sur la mv  
-		
-		
+	/**
+	 * Répartit les requetes aux machines virtuelles
+	 * @param requete
+	 * @throws Exception
+	 * @pre    requete !=null
+	 */
+	public void repartition(Request requete) throws Exception{
+		System.out.println("entrée dans la méthode répartition de requête ");
+		assert requete !=null;
+		this.listePortsRR.get(this.mvcourante).traitementRequete(requete);
+		this.mvcourante++;
+		System.out.println("Requete envoyée à la machine virtuelle " +listePortsRR.get(mvcourante-1));
 	}
 	
 	/**
