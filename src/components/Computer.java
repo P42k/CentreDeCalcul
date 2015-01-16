@@ -10,13 +10,13 @@ public class Computer extends AbstractComponent {
 	/** Liste des coeurs de l'ordinateur */
 	private ArrayList<Core> cores;
 	/** id unique de l'ordinateur		 */
-	private int id;
+	private String id;
 
 	/** Crée un ordinateur avec le nombre de Coeur passé en paramètres
 	 * @param int nombre de Coeurs
 	 * @param int id de l'oridnateur
 	 * */
-	public Computer(int nbCores, int id){
+	public Computer(int nbCores, String id){
 		//innercomponents des coeurs
 		cores = new ArrayList<Core>(nbCores);
 		this.id=id;

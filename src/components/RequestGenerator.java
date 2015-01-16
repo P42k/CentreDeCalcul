@@ -31,7 +31,7 @@ public class RequestGenerator extends AbstractComponent {
 	protected boolean isFinish;
 	private int maxRequest;
 	
-	public	RequestGenerator(double meanInterArrivalTime, double meanProcessingTime, String admissionControllerURI ) throws Exception
+	public	RequestGenerator(double meanInterArrivalTime, double meanProcessingTime, int requestGeneratorId, String admissionControllerURI ) throws Exception
 		{
 			super(true, true) ;
 
@@ -45,7 +45,7 @@ public class RequestGenerator extends AbstractComponent {
 			this.nextRequestTaskFuture = null ;
 			this.admissionControllerURI = admissionControllerURI;
 			//créer l'id du generateur
-			
+			this.requestGeneratorId = requestGeneratorId;
 			//on crée le port pour se lier au AdmissionController
 			acop =  new RequestGeneratorACOutBoundPort(this);
 			addPort(acop);
@@ -118,7 +118,7 @@ public class RequestGenerator extends AbstractComponent {
 		long processingTime =
 					(long) this.rng.nextExponential(this.meanProcessingTime) ;
 		if(!isFinish){
-		rrop.acceptRequest(new Request(this.counter++, processingTime,applicationURI)) ;
+		rrop.repartition(new Request(this.counter++, processingTime,applicationURI)) ;
 			if (counter >= maxRequest){
 				stop();
 				isFinish = true;

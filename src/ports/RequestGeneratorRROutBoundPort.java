@@ -12,9 +12,10 @@ public class RequestGeneratorRROutBoundPort extends AbstractOutboundPort impleme
 		super(outboundPortURI, RequestRepartitorI.class, owner);
 	}
 
-
-	public void acceptRequest(Request r) throws Exception {
-		((RequestRepartitorI)super.connector).acceptRequest(r);
+	@Override
+	public void repartition(Request r) throws Exception {
+		((RequestRepartitorI)super.connector).repartition(r);
 	}
+
 
 }
