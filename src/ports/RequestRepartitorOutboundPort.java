@@ -13,9 +13,19 @@ public class RequestRepartitorOutboundPort extends AbstractOutboundPort implemen
 	}
 
 	@Override
-	public void traitementRequete(Request requete) throws Exception {
-		// TODO Auto-generated method stub
+	public String getIdApplication() {
 		
+		return ((VirtualMachineI)super.connector).getIdApplication();
+	}
+
+	@Override
+	public void setIdApplication(String idApplication) {
+		((VirtualMachineI)super.connector).setIdApplication(idApplication);
+	}
+
+	@Override
+	public void traitementRequete(Request requete) throws Exception {
+		((VirtualMachineI)super.connector).traitementRequete(requete);
 	}
 
 }
