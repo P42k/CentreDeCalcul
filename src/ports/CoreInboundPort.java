@@ -1,7 +1,8 @@
 package ports;
 
-import components.Core;
+import java.rmi.RemoteException;
 
+import components.Core;
 import ressources.Request;
 import interfaces.CoreI;
 import fr.upmc.components.ComponentI;
@@ -26,14 +27,14 @@ public class CoreInboundPort extends AbstractInboundPort implements CoreI {
 
 	/** Appelle la méthode setFréquence du composant Coeur */
 	@Override
-	public void setFrequence(double frequence) {
+	public void setFrequence(double frequence) throws RemoteException{
 		final Core c = (Core) this.owner;
 		c.setFrequence(frequence);
 	}
 
 	/** Appelle la méthode getFrequence du composant Coeur */
 	@Override
-	public double getFrequence() {
+	public double getFrequence() throws RemoteException{
 		final Core c = (Core) this.owner;
 		return c.getFrequence();
 	}

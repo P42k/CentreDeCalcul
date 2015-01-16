@@ -1,5 +1,7 @@
 package connectors;
 
+import java.rmi.RemoteException;
+
 import interfaces.CoreI;
 import interfaces.VirtualMachineI;
 import ressources.Request;
@@ -20,13 +22,13 @@ public class CoreConnector extends AbstractConnector implements CoreI{
 	}
 
 	@Override
-	public void setFrequence(double frequence) {
+	public void setFrequence(double frequence) throws RemoteException{
 		((CoreI)this.offering).setFrequence(frequence);
 	
 	}
 
 	@Override
-	public double getFrequence() {
+	public double getFrequence() throws RemoteException{
 		return ((CoreI)this.offering).getFrequence();
 	}
 }

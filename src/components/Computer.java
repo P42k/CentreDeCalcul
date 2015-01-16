@@ -1,41 +1,57 @@
 package components;
 
+import interfaces.ComputerI;
+
 import java.util.ArrayList;
+
 import ressources.Frequence;
 import fr.upmc.components.AbstractComponent;
+import fr.upmc.components.exceptions.ComponentStartException;
 
 /** Composant simulant une machine physique */
 
-public class Computer extends AbstractComponent {
+public class Computer extends AbstractComponent implements ComputerI {
 	/** Liste des coeurs de l'ordinateur */
 	private ArrayList<Core> cores;
 	/** id unique de l'ordinateur		 */
 	private String id;
 
+	public String getId() {
+		return id;
+	}
+
 	/** Crée un ordinateur avec le nombre de Coeur passé en paramètres
 	 * @param int nombre de Coeurs
 	 * @param int id de l'oridnateur
 	 * */
-	public Computer(int nbCores, String id){
+
+	public Computer(int nbCores, String uriComputer) {
 		//innercomponents des coeurs
-		cores = new ArrayList<Core>(nbCores);
-		this.id=id;
-		//ajout des coeurs
-		String uriCore = this.id +"";
-		for (int i = 0; i<nbCores; i++){
-			uriCore = "Core"+i;
-			try {
-				Core c= new Core(Frequence.F20.getFrequence(),uriCore);
-				cores.add(c);
-				this.innerComponents.add(c);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		System.out.println("L'ordinateur " + id + "a été créé.");
+				cores = new ArrayList<Core>(nbCores);
+				this.id=uriComputer;
+				//ajout des coeurs
+				String uriCore = this.id;
+				for (int i = 0; i<nbCores; i++){
+					uriCore = "Core"+i;
+					try {
+						Core c= new Core(Frequence.F20.getFrequence(),uriCore);
+						cores.add(c);
+						this.innerComponents.add(c);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				System.out.println("L'ordinateur " + id + " a été créé.");
 
 	}
-
+	@Override
+	public void start() throws ComponentStartException{
+		super.start();
+		for(Core c: cores){
+			c.start();
+		}
+	}
+	
 	/** Récupère la liste des coeurs de l'ordinateur 
 	 *@return ArrayList<Core> liste de coeur
 	 **/
@@ -60,6 +76,7 @@ public class Computer extends AbstractComponent {
 				list.add(this.cores.get(i).getUri());
 			}
 		}
+		System.out.println(list.size());
 		return list;
 	}
 

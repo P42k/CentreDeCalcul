@@ -2,12 +2,14 @@ package components;
 
 import interfaces.AdmissionControllerI;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import connectors.ComputerConnector;
 import ports.AdmissionControllerInboundPort;
 import ports.AdmissionControllerOutboundPort;
 import fr.upmc.components.AbstractComponent;
+import fr.upmc.components.exceptions.ComponentStartException;
 import fr.upmc.components.ports.PortI;
 
 public class AdmissionController extends AbstractComponent implements AdmissionControllerI{
@@ -32,7 +34,6 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 		}
 		listeComputer = uriComputer;
 		listeMV = new ArrayList<VirtualMachine>();
-		createVirtualMachines();
 		cop = new ArrayList<AdmissionControllerOutboundPort>();
 		AdmissionControllerOutboundPort p; 
 		for (int i = 0; i<uriComputer.size();i++){
@@ -41,15 +42,24 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 			p.localPublishPort();
 			cop.add(p);
 		}
+		
 	}
 	
-	public void start(){
+	public void start() throws ComponentStartException{
+		super.start();
 		for(int i=0; i<listeComputer.size();i++){
 			try {
 				cop.get(i).doConnection(listeComputer.get(i), ComputerConnector.class.getCanonicalName());
+				System.out.println("La connexion a été faite avec "+ listeComputer.get(i));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		try {
+			createVirtualMachines();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -93,12 +103,16 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 	/**
 	 * Va créer les machines virtuelles. Par convention une machine virtuelle a 4 coeurs
 	 * @param nb nombre de machines virtuelles à créer
+	 * @throws RemoteException 
 	 */
-	public void createVirtualMachines(){
+	public void createVirtualMachines() throws RemoteException{
 		int cpt = 0;
 		VirtualMachine mv;
 		ArrayList<String> tmp = new ArrayList<String>();
+		System.out.println(cop.get(0).getId());
 		for(int i=0;i<cop.size();i++){
+			System.out.println(cop.size());
+			
 			ArrayList<String> coeursUri=cop.get(i).getAvailableCores();
 			try {
 				while(!coeursUri.isEmpty()){

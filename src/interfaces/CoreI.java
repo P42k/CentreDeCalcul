@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.rmi.RemoteException;
+
 import ressources.Request;
 import fr.upmc.components.interfaces.OfferedI;
 import fr.upmc.components.interfaces.RequiredI;
@@ -17,12 +19,12 @@ public interface CoreI extends OfferedI, RequiredI {
 	 * Met à jour la fréquence du coeur
 	 * @param frequence double représentant la fréquence du coeur à choisir dans l'enum Frequence
 	 */
-	public void setFrequence(double frequence);
+	public void setFrequence(double frequence) throws RemoteException;
 	
 	/** Met à jour la fréquence du coeur 
 	 * @param frequence double
 	 */
-	public double getFrequence();
+	public double getFrequence() throws RemoteException;
 	
 	
 }

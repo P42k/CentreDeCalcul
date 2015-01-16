@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import ports.CoreInboundPort;
 import ressources.Request;
 import fr.upmc.components.AbstractComponent;
+import fr.upmc.components.exceptions.ComponentStartException;
 
 public class Core extends AbstractComponent implements CoreI{
 	// -------------------------------------------------------------------------
@@ -44,7 +45,9 @@ public class Core extends AbstractComponent implements CoreI{
 		
 	}
 	
-	
+	public void start() throws ComponentStartException{
+		super.start();
+	}
 
 
 	/** Réupère la fréquence du coeur

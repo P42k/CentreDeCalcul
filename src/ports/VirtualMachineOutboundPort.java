@@ -1,5 +1,7 @@
 package ports;
 
+import java.rmi.RemoteException;
+
 import interfaces.CoreI;
 import ressources.Request;
 import fr.upmc.components.ComponentI;
@@ -24,12 +26,12 @@ public class VirtualMachineOutboundPort extends AbstractOutboundPort implements 
 	
 
 	@Override
-	public void setFrequence(double frequence) {
+	public void setFrequence(double frequence) throws RemoteException {
 		((CoreI)this.connector).setFrequence(frequence);;
 	}
 
 	@Override
-	public double getFrequence() {
+	public double getFrequence() throws RemoteException {
 		return ((CoreI)this.connector).getFrequence();
 	}
 		

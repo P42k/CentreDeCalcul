@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import fr.upmc.components.interfaces.OfferedI;
@@ -12,12 +13,13 @@ public interface ComputerI extends OfferedI{
 	 * @param uriCore uri du Coeur
 	 * @param b booléen de la disponibilité
 	 */
-	public void setAvailableCore(String uriCore, boolean b);
+	public void setAvailableCore(String uriCore, boolean b) throws RemoteException;
 
 	/** Fonction retournant la liste des uri des coeurs disponibles dans l'ordinateur
 	 * @return liste des uri des coeurs disponibles
 	 */
-	public ArrayList<String> getAvailableCores();
-
+	public ArrayList<String> getAvailableCores() throws RemoteException;
+	
+	public String getId() throws RemoteException;
 	
 }

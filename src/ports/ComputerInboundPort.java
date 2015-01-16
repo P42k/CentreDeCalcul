@@ -1,6 +1,8 @@
 package ports;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+
 import components.Computer;
 import interfaces.ComputerI;
 import fr.upmc.components.ComponentI;
@@ -23,16 +25,20 @@ public class ComputerInboundPort  extends AbstractInboundPort implements Compute
 	
 	/** Appelle la méthode setAvailableCore du composant Ordinateur */
 	@Override
-	public void setAvailableCore(String uriCore, boolean b) {
+	public void setAvailableCore(String uriCore, boolean b) throws RemoteException{
 		final Computer c = (Computer)  this.owner;
 		c.setAvailableCore(uriCore, b);
 	}
 
 	/** Appelle la méthode getAvailableCores du composant Ordinateur */
 	@Override
-	public ArrayList<String> getAvailableCores() {
+	public ArrayList<String> getAvailableCores() throws RemoteException{
 		final Computer c = (Computer)  this.owner;
 		return c.getAvailableCores();
 	}
 
+	public String getId() throws RemoteException{
+		final Computer c = (Computer) this.owner;
+		return c.getId();
+	}
 }

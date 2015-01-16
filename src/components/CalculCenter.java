@@ -12,7 +12,9 @@ public class CalculCenter extends AbstractComponent{
 	String uriComputer = "uriComputer";
 	
 	public CalculCenter() throws Exception{
+		
 		comp = new Computer(16,uriComputer);
+
 		ArrayList<String> cliste = new ArrayList<String>();
 		cliste.add(uriComputer);
 		ac = new AdmissionController(admissionControllerURI, cliste);
@@ -22,6 +24,7 @@ public class CalculCenter extends AbstractComponent{
 	
 	public void start() throws ComponentStartException{
 		super.start();
+		comp.start();
 		ac.start();
 	}
 
