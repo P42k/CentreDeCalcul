@@ -9,6 +9,7 @@ import org.apache.commons.math3.random.RandomDataGenerator;
 
 import connectors.AdmissionControllerConnector;
 import connectors.RequestRepartitorConnector;
+import connectors.VirtualMachineConnector;
 import ports.RequestGeneratorACOutBoundPort;
 import ports.RequestGeneratorRROutBoundPort;
 import ressources.Request;

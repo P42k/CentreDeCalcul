@@ -1,26 +1,14 @@
 package connectors;
 
-import java.rmi.RemoteException;
-
-import interfaces.VirtualMachineI;
 import ressources.Request;
+import interfaces.RequestRepartitorI;
 import fr.upmc.components.connectors.AbstractConnector;
 
-public class RequestRepartitorConnector extends AbstractConnector implements VirtualMachineI{
+public class RequestRepartitorConnector extends AbstractConnector implements RequestRepartitorI{
 
 	@Override
-	public void traitementRequete(Request requete) throws Exception {
-		((VirtualMachineI)offering).traitementRequete(requete);
+	public void repartition(Request request) throws Exception {
+		((RequestRepartitorI) offering).repartition(request);
 	}
 
-	@Override
-	public String getIdApplication() throws RemoteException {
-		// TODO Auto-generated method stub
-		return ((VirtualMachineI)offering).getIdApplication();
-	}
-
-	@Override
-	public void setIdApplication(String idApplication) throws RemoteException {
-		((VirtualMachineI)offering).setIdApplication(idApplication);
-	}
 }
