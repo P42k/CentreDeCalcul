@@ -6,5 +6,5 @@ import ressources.Request;
 
 public interface RequestRepartitorI extends OfferedI, RequiredI {
 
-	public void acceptRequest(Request request) throws Exception;
+	public void repartition(Request request) throws Exception;
 }
