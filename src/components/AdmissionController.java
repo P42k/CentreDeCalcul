@@ -12,7 +12,7 @@ import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.exceptions.ComponentStartException;
 import fr.upmc.components.ports.PortI;
 
-public class AdmissionController extends AbstractComponent implements AdmissionControllerI{
+public class AdmissionController extends AbstractComponent{
 	//public static final String admissionControllerURI = "admission-controller-URI";
 	private ArrayList<VirtualMachine> listeMV;
 	private ArrayList<String> listeComputer;
