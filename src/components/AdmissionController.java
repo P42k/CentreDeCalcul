@@ -14,7 +14,7 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 	//public static final String admissionControllerURI = "admission-controller-URI";
 	private ArrayList<VirtualMachine> listeMV;
 	private ArrayList<String> listeComputer;
-	private ArrayList<String> listeApplication;
+	private ArrayList<RequestRepartitor> listeApplication;
 	private ArrayList<AdmissionControllerOutboundPort> cop;
 	private int applicationId;
 	
@@ -67,24 +67,27 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 		//on crée une application V
 		//on l'ajoute dans la listeApplication;
 		//on retourne l'uri de celle ci
+		ArrayList<String> tmpVm=new ArrayList<String>();
 		if(listeMV.size()>=4){
-			ArrayList<VirtualMachine> tmpVm=new ArrayList<VirtualMachine>();
-			tmpVm.add(listeMV.remove(0));
-			tmpVm.add(listeMV.remove(0));
-			tmpVm.add(listeMV.remove(0));
-			tmpVm.add(listeMV.remove(0));
+			tmpVm.add(listeMV.get(applicationId*4).getMvUri());
+			tmpVm.add(listeMV.get(applicationId*4+1).getMvUri());
+			tmpVm.add(listeMV.get(applicationId*4+2).getMvUri());
+			tmpVm.add(listeMV.get(applicationId*4+3).getMvUri());
 		}
 		String auri = "application_"+applicationId;
 		applicationId++;
-		listeApplication.add(auri);
+		RequestRepartitor rr = new RequestRepartitor(auri, tmpVm);
+		listeApplication.add(rr);
+		this.innerComponents.add(rr);
 
 		return auri;
 	}
 
 	public void finish(String uriApplication)throws Exception{
-		//enlever de la liste
-		//désalloués les MV
-		//remettre les mv dans la listeMVdispos
+		//RequestRepartitor rr = applicationId
+		//faire un remove
+		//this.innercomponents.remove(rr)
+		//désallouer les MV à partir de MV
 	}
 	
 	/**
@@ -92,18 +95,6 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 	 * @param nb nombre de machines virtuelles à créer
 	 */
 	public void createVirtualMachines(){
-//		VirtualMachine mv;
-//		ArrayList<String> coeursUri;
-//		for(int i=0;i<nb;i++){
-//			coeursUri=cop.get(i).getAvailableCores();
-//			try {
-//				mv=new VirtualMachine(coeursUri, null, "VM"+i, false);
-//				listeMVdispos.add("VM"+i);
-//			} catch (Exception e) {
-//				System.out.println("Impossible de créer la machine VM"+i);
-//				e.printStackTrace();
-//			}
-//		}
 		int cpt = 0;
 		VirtualMachine mv;
 		ArrayList<String> tmp = new ArrayList<String>();
@@ -116,6 +107,7 @@ public class AdmissionController extends AbstractComponent implements AdmissionC
 					}else{
 						mv=new VirtualMachine(tmp, null, "VM_"+cpt/4, false);
 						listeMV.add(mv);
+						mv.start();
 						tmp =  new ArrayList<String>();
 					}
 				}

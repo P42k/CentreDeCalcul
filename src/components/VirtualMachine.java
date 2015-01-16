@@ -35,8 +35,16 @@ public class VirtualMachine extends AbstractComponent {
 	private ArrayList<CoreStatus> ce;
 	/** Uri de la machine virtuelle */
 	private String mvUri;
-	
 
+
+
+	public String getMvUri() {
+		return mvUri;
+	}
+
+	public void setMvUri(String mvUri) {
+		this.mvUri = mvUri;
+	}
 
 	/**
 	 * Crée une machine virtuelle
@@ -80,17 +88,6 @@ public class VirtualMachine extends AbstractComponent {
 	 * @throws Exception
 	 */
 	public void traitementRequete(Request requete) throws Exception{
-//		// ajouter dans la file
-//		this.requestsQueue.add(requete);
-//		System.out.println("Ajout de la requête " + requete + "à la file d'attente.");
-//		
-//		// recherche un coeur libre dans la liste des coeurs reliés
-//		for(int idCoeur=0;idCoeur<listeCoeurs.size();idCoeur++){
-//			if(listeCoeurs.get(idCoeur).isFree()){
-//				listeCoeurs.get(idCoeur).requestTreatment(this.requestsQueue.remove());
-//				break;
-//			}
-//		}
 		requestsQueue.add(requete);
 		for(int i=0; i<listeURICoeur.size(); i++){
 			if(ce.get(i).isFree()){
