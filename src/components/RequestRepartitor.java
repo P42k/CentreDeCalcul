@@ -6,9 +6,8 @@ import java.util.ArrayList;
 
 import ports.RequestRepartitorInboundPort;
 import ports.RequestRepartitorOutboundPort;
-import ports.VirtualMachineOutboundPort;
-import ressources.CoreStatus;
 import ressources.Request;
+import connectors.RequestRepartitorConnector;
 import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.exceptions.ComponentStartException;
 import fr.upmc.components.ports.PortI;
@@ -83,7 +82,7 @@ public class RequestRepartitor extends AbstractComponent {
 		super.start();
 		for (int i=0; i<listePortsRR.size();i++){
 			try{
-				this.listePortsRR.get(i).doConnection(this.listeMV.get(i),"connectors.RRVMConnector");
+				this.listePortsRR.get(i).doConnection(this.listeMV.get(i),RequestRepartitorConnector.class.getCanonicalName());
 				System.out.println("Connexion du répartiteur de requete  "+this.listePortsRR.get(i)+ "avec la machine virtuelle " + this.listeMV.get(i));
 			}catch(Exception e){
 				System.err.println("Connection impossible avec la Machine Virtuelle : " + listeMV.get(i));

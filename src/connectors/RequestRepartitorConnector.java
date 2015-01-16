@@ -1,12 +1,24 @@
 package connectors;
 
-import fr.upmc.components.connectors.AbstractConnector;
+import interfaces.VirtualMachineI;
 import ressources.Request;
-import interfaces.RequestRepartitorI;
+import fr.upmc.components.connectors.AbstractConnector;
 
-public class RequestRepartitorConnector extends AbstractConnector{
+public class RequestRepartitorConnector extends AbstractConnector implements VirtualMachineI{
 
-	public void repartition(Request request) throws Exception{
-		((RequestRepartitorI)offering).repartition(request);
+	@Override
+	public void traitementRequete(Request requete) throws Exception {
+		((VirtualMachineI)offering).traitementRequete(requete);
+	}
+
+	@Override
+	public String getIdApplication() {
+		// TODO Auto-generated method stub
+		return ((VirtualMachineI)offering).getIdApplication();
+	}
+
+	@Override
+	public void setIdApplication(String idApplication) {
+		((VirtualMachineI)offering).setIdApplication(idApplication);
 	}
 }
