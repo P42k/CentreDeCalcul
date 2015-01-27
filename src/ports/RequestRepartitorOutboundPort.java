@@ -17,17 +17,17 @@ public class RequestRepartitorOutboundPort extends AbstractOutboundPort implemen
 	@Override
 	public String getIdApplication() throws RemoteException {
 		
-		return ((VirtualMachineI)super.connector).getIdApplication();
+		return ((VirtualMachineI)this.connector).getIdApplication();
 	}
 
 	@Override
 	public void setIdApplication(String idApplication) throws RemoteException {
-		((VirtualMachineI)super.connector).setIdApplication(idApplication);
+		((VirtualMachineI)this.connector).setIdApplication(idApplication);
 	}
 
 	@Override
 	public void traitementRequete(Request requete) throws Exception {
-		((VirtualMachineI)super.connector).traitementRequete(requete);
+		((VirtualMachineI)this.connector).traitementRequete(requete);
 	}
 
 }

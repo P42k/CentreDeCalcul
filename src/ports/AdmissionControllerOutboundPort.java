@@ -15,17 +15,17 @@ public class AdmissionControllerOutboundPort extends AbstractOutboundPort implem
 
 	@Override
 	public void setAvailableCore(String uriCore, boolean b) throws RemoteException {
-		((ComputerI)super.connector).setAvailableCore(uriCore,b);
+		((ComputerI)this.connector).setAvailableCore(uriCore,b);
 		
 	}
 
 	@Override
 	public ArrayList<String> getAvailableCores() throws RemoteException {
-		return ((ComputerI)super.connector).getAvailableCores();
+		return ((ComputerI)this.connector).getAvailableCores();
 	}
 
 	@Override
 	public String getId() throws RemoteException{
-		return ((ComputerI)super.connector).getId();
+		return ((ComputerI)this.connector).getId();
 	}
 }

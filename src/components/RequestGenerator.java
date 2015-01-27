@@ -28,14 +28,15 @@ public class RequestGenerator extends AbstractComponent {
 	protected Future<?> nextRequestTaskFuture;
 	protected String applicationURI;
 	protected int requestGeneratorId;
-	protected String admissionControllerURI;
+	protected String admissionControllerInboundURI;
+	protected String requestGeneratorOutboundURI;
 	protected boolean isFinish;
 	private int maxRequest;
 	
-	public	RequestGenerator(double meanInterArrivalTime, double meanProcessingTime, int requestGeneratorId, String admissionControllerURI ) throws Exception
+	public	RequestGenerator(double meanInterArrivalTime, double meanProcessingTime, int requestGeneratorId, String admissionControllerInboundURI,String requestGeneratorOutboundURI ) throws Exception
 		{
 			super(true, true) ;
-
+			this.toggleTracing();
 			assert	meanInterArrivalTime > 0.0 && meanProcessingTime > 0.0 ;
 			this.isFinish = false;
 			this.counter = 0 ;
@@ -44,7 +45,8 @@ public class RequestGenerator extends AbstractComponent {
 			this.rng = new RandomDataGenerator() ;
 			this.rng.reSeed() ;
 			this.nextRequestTaskFuture = null ;
-			this.admissionControllerURI = admissionControllerURI;
+			this.admissionControllerInboundURI = admissionControllerInboundURI;
+			this.requestGeneratorOutboundURI = requestGeneratorOutboundURI;
 			//créer l'id du generateur
 			this.requestGeneratorId = requestGeneratorId;
 			//on crée le port pour se lier au AdmissionController
@@ -61,10 +63,10 @@ public class RequestGenerator extends AbstractComponent {
 		super.start();
 		try {
 			//connexion avec le controleur d'admission
-			acop.doConnection(admissionControllerURI, AdmissionControllerConnector.class.getCanonicalName());
+			acop.doConnection(admissionControllerInboundURI, AdmissionControllerConnector.class.getCanonicalName());
 			//on récupère l'uri de l'application pour se connecter au répartiteur correspondant
 			applicationURI = acop.accept(requestGeneratorId);
-			System.out.println("Connexion du générateur de requêtes au contrôleur d'admission"+admissionControllerURI+ "effectuée.");
+			System.out.println("Connexion du générateur de requêtes au contrôleur d'admission"+admissionControllerInboundURI+ "effectuée.");
 		} catch (Exception e3) {
 			e3.printStackTrace();
 		}

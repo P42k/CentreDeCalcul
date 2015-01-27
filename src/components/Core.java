@@ -22,6 +22,8 @@ public class Core extends AbstractComponent implements CoreI{
 	private CoreInboundPort cp;
 	/** Uri du coeur */
 	private String uri;
+	/**moyenne de temps d'execution sur le coeur**/
+	private long meanProcessingTime;
 	
 	/**
 	 * Crée un coeur grâce à sa fréquence et son uri. Le coeur est initialement libre.
@@ -41,7 +43,7 @@ public class Core extends AbstractComponent implements CoreI{
 		this.addPort(this.cp) ;
 		this.cp.localPublishPort() ;
 		System.out.println("Le coeur "+ uri + " a été créé.");
-		
+		this.meanProcessingTime = 0;
 		
 	}
 	

@@ -14,14 +14,14 @@ public class RequestGeneratorACOutBoundPort extends AbstractOutboundPort impleme
 
 	@Override
 	public String accept(int RequestGeneratorId) throws Exception {
-		return ((AdmissionControllerI) super.connector).accept(RequestGeneratorId);
+		return ((AdmissionControllerI) this.connector).accept(RequestGeneratorId);
 	}
 
 
 
 	@Override
 	public void finish(String applicationURI) throws Exception {
-		((AdmissionControllerI) super.connector).finish(applicationURI);
+		((AdmissionControllerI) this.connector).finish(applicationURI);
 		
 	}
 

@@ -14,7 +14,7 @@ public class RequestGeneratorRROutBoundPort extends AbstractOutboundPort impleme
 
 	@Override
 	public void repartition(Request r) throws Exception {
-		((RequestRepartitorI)super.connector).repartition(r);
+		((RequestRepartitorI)this.connector).repartition(r);
 	}
 
 

@@ -22,6 +22,7 @@ public class AdmissionController extends AbstractComponent{
 	
 	public AdmissionController(String admissionControllerURI, ArrayList<String> uriComputer) throws Exception{
 		super(true,true);
+		this.toggleTracing();
 		applicationId = 0;
 		//addofferedInterface pour le centre de calcul et le RG, création de port, addport, localpublishport
 		addOfferedInterface(AdmissionControllerI.class);
@@ -37,7 +38,7 @@ public class AdmissionController extends AbstractComponent{
 		cop = new ArrayList<AdmissionControllerOutboundPort>();
 		AdmissionControllerOutboundPort p; 
 		for (int i = 0; i<uriComputer.size();i++){
-			p = new AdmissionControllerOutboundPort(uriComputer.get(i),this);
+			p = new AdmissionControllerOutboundPort("uriAC"+i,this);
 			addPort(p);
 			p.localPublishPort();
 			cop.add(p);
@@ -49,7 +50,8 @@ public class AdmissionController extends AbstractComponent{
 		super.start();
 		for(int i=0; i<listeComputer.size();i++){
 			try {
-				cop.get(i).doConnection(listeComputer.get(i), ComputerConnector.class.getCanonicalName());
+				System.out.println(listeComputer.get(i));
+				cop.get(i).doConnection(listeComputer.get(i), "connectors.ComputerConnector");
 				System.out.println("La connexion a été faite avec "+ listeComputer.get(i));
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -15,7 +15,7 @@ public class CVM extends AbstractCVM{
 	
 	RequestGenerator rg;
 	CalculCenter cc;
-	
+	String requestGeneratorOutboundURI = "requestGeneratorOutboundURI"; 
 	/**
 	 * instancie, publie et lie les composants entre eux
 	 *
@@ -28,8 +28,9 @@ public class CVM extends AbstractCVM{
 	 * @throws Exception 
 	 */
 	public void deploy() throws Exception{
+		AbstractCVM.toggleDebugMode();
 		cc = new CalculCenter();
-		rg = new RequestGenerator(1000.0, 800.0, 0, cc.getAdmissionControllerURI());
+		rg = new RequestGenerator(1000.0, 800.0, 0, cc.getAdmissionControllerURI(), requestGeneratorOutboundURI);
 		
 		super.deploy();
 	}

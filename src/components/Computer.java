@@ -26,7 +26,8 @@ public class Computer extends AbstractComponent implements ComputerI {
 	 * */
 
 	public Computer(int nbCores, String uriComputer) {
-		//innercomponents des coeurs
+			this.toggleTracing();
+			//innercomponents des coeurs
 				cores = new ArrayList<Core>(nbCores);
 				this.id=uriComputer;
 				//ajout des coeurs
