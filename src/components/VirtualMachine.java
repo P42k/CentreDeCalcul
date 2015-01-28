@@ -19,19 +19,19 @@ import fr.upmc.components.ports.PortI;
 /** VirtualMachine implante un composant qui simule une machine virtuelle */
 
 
-//TODO : le shutdown. A voir pour les détails dans ServiceProvider.java de 
+//TODO : le shutdown. A voir pour les dï¿½tails dans ServiceProvider.java de 
 // SingleServerEventBasedSimulation
 
 public class VirtualMachine extends AbstractComponent {
-	/** Liste des ports de la VM connecté aux coeurs						*/
+	/** Liste des ports de la VM connectï¿½ aux coeurs						*/
 	private ArrayList<VirtualMachineOutboundPort> listeCoeurs;
 	/** Uri de l'application en cours sur la VM 					*/
 	private String idApplication;
 	/**Liste des URIs des coeurs avec lesquels la MV va communiquer			*/
 	private ArrayList<String> listeURICoeur;
-	/** La file des requêtes en attente de traitement 						*/
+	/** La file des requï¿½tes en attente de traitement 						*/
 	protected BlockingQueue<Request> requestsQueue;
-	/** la liste des états des coeurs */
+	/** la liste des ï¿½tats des coeurs */
 	private ArrayList<CoreStatus> ce;
 	/** Uri de la machine virtuelle */
 	private String mvUri;
@@ -47,17 +47,17 @@ public class VirtualMachine extends AbstractComponent {
 	}
 
 	/**
-	 * Crée une machine virtuelle
+	 * Crï¿½e une machine virtuelle
 	 * @param listeURICoeur liste des uris des coeurs
 	 * @param idApp identifiant de l'application
 	 * @param MVPortURI uri du port de la machine virtuelle
-	 * @param isDistributed booléen définissant si la machine virtuelle est distribuée
+	 * @param isDistributed boolï¿½en dï¿½finissant si la machine virtuelle est distribuï¿½e
 	 * @throws Exception
 	 */
 	public VirtualMachine(ArrayList<String> listeURICoeur, String idApp, String MVPortURI,
 			boolean isDistributed) throws Exception{
-		//ajout de la méthode offeredInterface, création port qui fournit la machine virtuelle, addport
-		//crée des ports qui requiert coeur, de les ajouter au composant puis à listeCoeurs
+		//ajout de la mï¿½thode offeredInterface, crï¿½ation port qui fournit la machine virtuelle, addport
+		//crï¿½e des ports qui requiert coeur, de les ajouter au composant puis ï¿½ listeCoeurs
 		super(true);
 		this.idApplication=idApp;
 		this.listeURICoeur=listeURICoeur;
@@ -71,20 +71,21 @@ public class VirtualMachine extends AbstractComponent {
 		
 		this.addRequiredInterface(CoreI.class);
 		VirtualMachineOutboundPort q;
+		listeCoeurs = new ArrayList<VirtualMachineOutboundPort>();
 		for(int i=0; i<this.listeURICoeur.size();i++){
-			//créer les ports pour communiquer avec les coeurs et les ajouter au composants ainsi qu'à la liste des ports Coeurs
-			q= new VirtualMachineOutboundPort(listeURICoeur.get(i), this);
+			//crï¿½er les ports pour communiquer avec les coeurs et les ajouter au composants ainsi qu'ï¿½ la liste des ports Coeurs
+			q= new VirtualMachineOutboundPort(mvUri+"TO"+listeURICoeur.get(i), this);
 			this.addPort(q);
 			q.localPublishPort();
 			this.listeCoeurs.add(q);
 		}
-		System.out.println("Machine virtuelle "+ mvUri+ " créée.");
+		System.out.println("Machine virtuelle "+ mvUri+ " crï¿½ï¿½e.");
 
 	}
 
 	/**
-	 * rajoute la requête dans la file d'attente et traite la requête en faisant appel à un coeur libre
-	 * @param requete la requête qui arrive à la machine virtuelle
+	 * rajoute la requï¿½te dans la file d'attente et traite la requï¿½te en faisant appel ï¿½ un coeur libre
+	 * @param requete la requï¿½te qui arrive ï¿½ la machine virtuelle
 	 * @throws Exception
 	 */
 	public void traitementRequete(Request requete) throws Exception{
@@ -127,8 +128,8 @@ public class VirtualMachine extends AbstractComponent {
 	}
 
 	/**
-	 * Sert à effectuer la connexion des ports recquis 
-	 * au démarrage du centre de calcul
+	 * Sert ï¿½ effectuer la connexion des ports recquis 
+	 * au dï¿½marrage du centre de calcul
 	 */
 	@Override
 	public void start() throws ComponentStartException{
@@ -147,23 +148,23 @@ public class VirtualMachine extends AbstractComponent {
 	}
 
 	/**
-	 * Arrête la Machine Virtuelle
+	 * Arrï¿½te la Machine Virtuelle
 	 */
 	public void shutdown() throws ComponentShutdownException{
-		// voir ce qu'on fait là
+		// voir ce qu'on fait lï¿½
 		super.shutdown();
 	}
 
 	/**
-	 * Récupère l'id de l'application à qui a été allouée la machine virtuelle
-	 * @return uri de l'applicaton à qui a été allouée la MV
+	 * Rï¿½cupï¿½re l'id de l'application ï¿½ qui a ï¿½tï¿½ allouï¿½e la machine virtuelle
+	 * @return uri de l'applicaton ï¿½ qui a ï¿½tï¿½ allouï¿½e la MV
 	 */
 	public String getIdApplication() {
 		return idApplication;
 	}
 
 	/**
-	 * Met à jour l'id de l'appli à qui est allouée la MV
+	 * Met ï¿½ jour l'id de l'appli ï¿½ qui est allouï¿½e la MV
 	 * @param idApplication uri de l'application
 	 */
 	public void setIdApplication(String idApplication) {
