@@ -32,14 +32,11 @@ public class RequestRepartitor extends AbstractComponent {
 	 * 
 	 */
 	public RequestRepartitor(String uriApplication,ArrayList<String> uriMVs) throws Exception{
-		super(true,true);
-		assert uriApplication !=null;
-		assert uriMVs != null;
 		
 		mvcourante = 0;
 		this.listeMV = uriMVs;
 		this.uriApplication = uriApplication;
-		
+		this.listePortsRR= new ArrayList<RequestRepartitorOutboundPort>();
 		//addOfferedInterface(), création du port, addport, localpublishport
 		this.addOfferedInterface(RequestRepartitorI.class);
 		PortI rrip = new RequestRepartitorInboundPort(this.uriApplication, this);

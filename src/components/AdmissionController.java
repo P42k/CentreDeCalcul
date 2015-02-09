@@ -44,7 +44,7 @@ public class AdmissionController extends AbstractComponent{
 			p.localPublishPort();
 			cop.add(p);
 		}
-		
+		System.out.println("Admission controller créé.");
 	}
 	
 	public void start() throws ComponentStartException{
@@ -61,7 +61,6 @@ public class AdmissionController extends AbstractComponent{
 		try {
 			createVirtualMachines();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -120,20 +119,15 @@ public class AdmissionController extends AbstractComponent{
 			
 			ArrayList<String> coeursUri=cop.get(i).getAvailableCores();
 			int size = coeursUri.size();
-//			System.out.println("liste des coeurs libres :");
-//			for (String c: coeursUri) {
-//				System.out.println(c);
-//			}
-			int idVM = 0;
+			int cptVM = 0;
 			try {
-				while(cpt < size){
-					if(cpt!=0 && cpt%4 == 0) {
-						//System.out.println("coeurs ok (fuck it) : création de la mv");
-						mv=new VirtualMachine(tmp, null, "VM_"+cpt/4, false);
-						idVM = cpt/4;
+				while(cpt <= size){
+					if((cpt!=0 && cpt%4 == 0)) {
+						mv=new VirtualMachine(tmp, null, i+"_VM_"+cptVM, false);
 						listeMV.add(mv);
 						mv.start();
 						// si on arrive ici, la création de la mv s'est déroulée sans encombres
+						cptVM++;
 						for (String coeur : tmp) {
 							cop.get(i).setCoreAvailability(coeur, true);
 						}
@@ -142,12 +136,13 @@ public class AdmissionController extends AbstractComponent{
 						for (String c: cop.get(i).getAvailableCores()) {
 							System.out.println(c);
 						}
+						System.out.println("$$$$$$$$$$$$$$$$$$$$");
 					}
-					tmp.add(coeursUri.get(cpt));
+					if(cpt!=size) tmp.add(coeursUri.get(cpt));
 					cpt++;
 				}
 			} catch (Exception e) {
-				System.out.println("Impossible de créer la machine VM"+idVM);
+				System.out.println("Impossible de créer la machine VM"+cptVM);
 				e.printStackTrace();
 			}
 		}

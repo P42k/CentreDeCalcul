@@ -32,41 +32,48 @@ public class RequestGenerator extends AbstractComponent {
 	protected String requestGeneratorOutboundURI;
 	protected boolean isFinish;
 	private int maxRequest;
-	
-	public	RequestGenerator(double meanInterArrivalTime, double meanProcessingTime, int requestGeneratorId, String admissionControllerInboundURI,String requestGeneratorOutboundURI ) throws Exception
-		{
-			super(true, true) ;
-			this.toggleTracing();
-			assert	meanInterArrivalTime > 0.0 && meanProcessingTime > 0.0 ;
-			this.isFinish = false;
-			this.counter = 0 ;
-			this.meanInterArrivalTime = meanInterArrivalTime ;
-			this.meanProcessingTime = meanProcessingTime ;
-			this.rng = new RandomDataGenerator() ;
-			this.rng.reSeed() ;
-			this.nextRequestTaskFuture = null ;
-			this.admissionControllerInboundURI = admissionControllerInboundURI;
-			this.requestGeneratorOutboundURI = requestGeneratorOutboundURI;
-			//créer l'id du generateur
-			this.requestGeneratorId = requestGeneratorId;
-			//on crée le port pour se lier au AdmissionController
-			acop =  new RequestGeneratorACOutBoundPort(this);
-			addPort(acop);
-			acop.localPublishPort();
-			//le RG a besoin de RequestRepartitorI pour utiliser le répartiteur de requetes
-			this.addRequiredInterface(RequestRepartitorI.class);
-			System.out.println("Générateur de requête créé.");
-		}
-	
+
+	public RequestGenerator(double meanInterArrivalTime,
+			double meanProcessingTime, int requestGeneratorId,
+			String admissionControllerInboundURI,
+			String requestGeneratorOutboundURI) throws Exception {
+		super(true, true);
+		this.toggleTracing();
+		assert meanInterArrivalTime > 0.0 && meanProcessingTime > 0.0;
+		this.isFinish = false;
+		this.counter = 0;
+		this.meanInterArrivalTime = meanInterArrivalTime;
+		this.meanProcessingTime = meanProcessingTime;
+		this.rng = new RandomDataGenerator();
+		this.rng.reSeed();
+		this.nextRequestTaskFuture = null;
+		this.admissionControllerInboundURI = admissionControllerInboundURI;
+		this.requestGeneratorOutboundURI = requestGeneratorOutboundURI;
+		// créer l'id du generateur
+		this.requestGeneratorId = requestGeneratorId;
+		// on crée le port pour se lier au AdmissionController
+		acop = new RequestGeneratorACOutBoundPort(this);
+		addPort(acop);
+		acop.localPublishPort();
+		// le RG a besoin de RequestRepartitorI pour utiliser le répartiteur de
+		// requetes
+		this.addRequiredInterface(RequestRepartitorI.class);
+		System.out.println("Générateur de requête créé.");
+	}
+
 	@Override
-	public void	start() throws ComponentStartException{
+	public void start() throws ComponentStartException {
 		super.start();
 		try {
-			//connexion avec le controleur d'admission
-			acop.doConnection(admissionControllerInboundURI, AdmissionControllerConnector.class.getCanonicalName());
-			//on récupère l'uri de l'application pour se connecter au répartiteur correspondant
+			// connexion avec le controleur d'admission
+			acop.doConnection(admissionControllerInboundURI,
+					"connectors.AdmissionControllerConnector");
+			// on récupère l'uri de l'application pour se connecter au
+			// répartiteur correspondant
 			applicationURI = acop.accept(requestGeneratorId);
-			System.out.println("Connexion du générateur de requêtes au contrôleur d'admission"+admissionControllerInboundURI+ "effectuée.");
+			System.out
+					.println("Connexion du générateur de requêtes au contrôleur d'admission"
+							+ admissionControllerInboundURI + "effectuée.");
 		} catch (Exception e3) {
 			e3.printStackTrace();
 		}
@@ -74,85 +81,83 @@ public class RequestGenerator extends AbstractComponent {
 			rrop = new RequestGeneratorRROutBoundPort(applicationURI, this);
 			addPort(rrop);
 			rrop.localPublishPort();
-			System.out.println("Connexion du générateur de requêtes à l'application effectuée.");
+			System.out
+					.println("Connexion du générateur de requêtes à l'application effectuée.");
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
-		
+
 		try {
-			//Connexion avec le répartiteur de requete
-			rrop.doConnection(applicationURI, RequestRepartitorConnector.class.getCanonicalName());
-			System.out.println("Connexion du générateur de requêtesau répartiteur de requêtes effectuée.");
+			// Connexion avec le répartiteur de requete
+			rrop.doConnection(applicationURI,
+					"connectors.RequestRepartitorConnector");
+			System.out
+					.println("Connexion du générateur de requêtes au répartiteur de requêtes effectuée.");
 
 		} catch (Exception e1) {
-			System.err.println("RequestGenerator : Connexion avec le RequestRepartitor impossible !");
+			System.err
+					.println("RequestGenerator : Connexion avec le RequestRepartitor impossible !");
 			e1.printStackTrace();
 		}
 
 		final RequestGenerator generateur = this;
-		this.scheduleTask(
-				new ComponentTask() {
-					@Override
-					public void run() {
-						try {
-							generateur.generateNextRequest();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				},
-				1000, TimeUnit.MILLISECONDS);
+		this.scheduleTask(new ComponentTask() {
+			@Override
+			public void run() {
+				try {
+					generateur.generateNextRequest();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}, 1000, TimeUnit.MILLISECONDS);
 	}
 
-	
-	
 	@Override
-	public void	shutdown() throws ComponentShutdownException{
-		if (this.nextRequestTaskFuture != null &&
-				!(this.nextRequestTaskFuture.isCancelled() || this.nextRequestTaskFuture.isDone())
-				) {
-			this.nextRequestTaskFuture.cancel(true) ;
+	public void shutdown() throws ComponentShutdownException {
+		if (this.nextRequestTaskFuture != null
+				&& !(this.nextRequestTaskFuture.isCancelled() || this.nextRequestTaskFuture
+						.isDone())) {
+			this.nextRequestTaskFuture.cancel(true);
 		}
 		super.shutdown();
 	}
-	
-	public void			generateNextRequest() throws Exception
-	{
-		long processingTime =
-					(long) this.rng.nextExponential(this.meanProcessingTime) ;
-		if(!isFinish){
-		rrop.repartition(new Request(this.counter++, processingTime,applicationURI)) ;
-			if (counter >= maxRequest){
+
+	public void generateNextRequest() throws Exception {
+		// System.out.println("Génération d'une nouvelle requête!");
+		long processingTime = (long) this.rng
+				.nextExponential(this.meanProcessingTime);
+		if (!isFinish) {
+			// System.out.println("Entrée dans le if?");
+			rrop.repartition(new Request(this.counter++, processingTime, applicationURI));
+			if (counter >= maxRequest) {
 				stop();
 				isFinish = true;
 			}
 		}
-		final RequestGenerator cg = this ;
-		long interArrivalDelay =
-				(long) this.rng.nextExponential(this.meanInterArrivalTime) ;
-		System.out.println(
-			"Scheduling request at " +
-					TimeProcessing.toString(System.currentTimeMillis() +
-														interArrivalDelay) +
-					" with processing time " + processingTime) ;
-		this.nextRequestTaskFuture =
-			this.scheduleTask(
-				new ComponentTask() {
-					@Override
-					public void run() {
-						try {
-							cg.generateNextRequest() ;
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				},
-				interArrivalDelay, TimeUnit.MILLISECONDS) ;
+		final RequestGenerator cg = this;
+		long interArrivalDelay = (long) this.rng
+				.nextExponential(this.meanInterArrivalTime);
+		System.out.println("Scheduling request at "
+				+ TimeProcessing.toString(System.currentTimeMillis()
+						+ interArrivalDelay) + " with processing time "
+				+ processingTime);
+		this.nextRequestTaskFuture = this.scheduleTask(new ComponentTask() {
+			@Override
+			public void run() {
+				try {
+					cg.generateNextRequest();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}, interArrivalDelay, TimeUnit.MILLISECONDS);
 	}
-	
-	//appeler le controleur d'admission pour arreter l'application dans 
+
+	// appeler le controleur d'admission pour arreter l'application dans
 	private void stop() {
-		System.out.println("Le RequestGenerator" + requestGeneratorId + "demande la terminaison de l'application");
+		System.out.println("Le RequestGenerator" + requestGeneratorId
+				+ "demande la terminaison de l'application");
 		try {
 			acop.finish(applicationURI);
 			rrop.doDisconnection();
@@ -161,5 +166,5 @@ public class RequestGenerator extends AbstractComponent {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
