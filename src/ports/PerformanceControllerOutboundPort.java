@@ -12,25 +12,23 @@ public class PerformanceControllerOutboundPort extends AbstractOutboundPort impl
 	public PerformanceControllerOutboundPort(String uri,
 			 ComponentI owner) throws Exception {
 		super(uri, CoreI.class, owner);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void requestTreatment(Request r) throws Exception {
-		// TODO Auto-generated method stub
+		((CoreI)this.connector).requestTreatment(r);
 		
 	}
 
 	@Override
 	public void setFrequence(double frequence) throws RemoteException {
-		// TODO Auto-generated method stub
+		((CoreI)this.connector).setFrequence(frequence);
 		
 	}
 
 	@Override
 	public double getFrequence() throws RemoteException {
-		// TODO Auto-generated method stub
-		return 0;
+		return ((CoreI)this.connector).getFrequence();
 	}
 
 }
