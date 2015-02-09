@@ -4,9 +4,12 @@ import interfaces.ComputerI;
 
 import java.util.ArrayList;
 
+import ports.ComputerInboundPort;
+import ports.VirtualMachineInboundPort;
 import ressources.Frequence;
 import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.exceptions.ComponentStartException;
+import fr.upmc.components.ports.PortI;
 
 /** Composant simulant une machine physique */
 
@@ -16,9 +19,6 @@ public class Computer extends AbstractComponent implements ComputerI {
 	/** id unique de l'ordinateur		 */
 	private String id;
 
-	public String getId() {
-		return id;
-	}
 
 	/** Crée un ordinateur avec le nombre de Coeur passé en paramètres
 	 * @param int nombre de Coeurs
@@ -42,9 +42,24 @@ public class Computer extends AbstractComponent implements ComputerI {
 						e.printStackTrace();
 					}
 				}
+				PortI p;
+				try {
+					p = new ComputerInboundPort(id, this);
+					this.addPort(p);
+					p.localPublishPort();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			
 				System.out.println("L'ordinateur " + id + " a été créé.");
 
 	}
+	
+	
+	public String getId() {
+		return id;
+	}
+	
 	@Override
 	public void start() throws ComponentStartException{
 		super.start();

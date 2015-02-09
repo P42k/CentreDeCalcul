@@ -20,7 +20,7 @@ public class AdmissionControllerInboundPort extends AbstractInboundPort implemen
 
 	@Override
 	public String accept(final int requestGeneratorId) throws Exception {
-		final AdmissionController ac = (AdmissionController) this.owner;
+		final AdmissionController ac = (AdmissionController)this.owner;
 		return ac.handleRequestSync(
 				new ComponentService<String>() {
 					@Override

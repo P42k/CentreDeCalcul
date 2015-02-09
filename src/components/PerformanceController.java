@@ -73,8 +73,6 @@ public class PerformanceController extends AbstractComponent {
 	 * méthode qui va s'appeler récursivement
 	 */
 	public void checkFreq(){
-		// récupération du temps moyen de process: comment?
-		// le prof avait dit que ce temps moyen était calculé lors de l'envoi des requêtes dans le centre de calcul...
 		//this.meanProcessingTime=?
 		//calcul du meanprocessingtime dans le répartiteur et renvoie de cette valeur à chaque appel à répartition
 		for(PerformanceControllerOutboundPort p : listePorts){
@@ -96,7 +94,7 @@ public class PerformanceController extends AbstractComponent {
 					e.printStackTrace();
 				}
 			}
-			checkFreq(); // quand l'arrêter?
+			checkFreq(); // Condition d'arrêt?
 		
 			//faire un getMeanProcessingTime
 			//Si superieur à seuil, augmenter fréquence

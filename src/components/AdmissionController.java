@@ -28,7 +28,7 @@ public class AdmissionController extends AbstractComponent{
 		addOfferedInterface(AdmissionControllerI.class);
 		try {
 			PortI acip = new AdmissionControllerInboundPort(admissionControllerURI, this);
-			addPort(acip);
+			this.addPort(acip);
 			acip.localPublishPort();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public class AdmissionController extends AbstractComponent{
 		super.start();
 		for(int i=0; i<listeComputer.size();i++){
 			try {
-				System.out.println(listeComputer.get(i));
+				//System.out.println(listeComputer.get(i));
 				cop.get(i).doConnection(listeComputer.get(i), "connectors.ComputerConnector");
 				System.out.println("La connexion a été faite avec "+ listeComputer.get(i));
 			} catch (Exception e) {
