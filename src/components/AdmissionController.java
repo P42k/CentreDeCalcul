@@ -109,6 +109,7 @@ public class AdmissionController extends AbstractComponent{
 	 * @throws RemoteException 
 	 */
 	public void createVirtualMachines() throws RemoteException{
+		System.out.println("on va créer des mv dans admission controller");
 		int cpt = 0;
 		VirtualMachine mv;
 		ArrayList<String> tmp = new ArrayList<String>();
@@ -117,16 +118,24 @@ public class AdmissionController extends AbstractComponent{
 			System.out.println(cop.size());
 			
 			ArrayList<String> coeursUri=cop.get(i).getAvailableCores();
+			System.out.println("liste des coeurs libres :");
+			for (String c: coeursUri) {
+				System.out.println(c);
+			}
 			try {
 				while(!coeursUri.isEmpty()){
 					if(cpt%4!=0||cpt==0){
 						tmp.add(coeursUri.remove(cpt));
+						//System.out.println("ajout d'un coeur");
 					}else{
+						//System.out.println("coeurs ok (fuck it) : création de la mv");
 						mv=new VirtualMachine(tmp, null, "VM_"+cpt/4, false);
 						listeMV.add(mv);
 						mv.start();
 						tmp =  new ArrayList<String>();
 					}
+
+					cpt++;
 				}
 			} catch (Exception e) {
 				System.out.println("Impossible de créer la machine VM"+i);

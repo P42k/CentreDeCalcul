@@ -79,7 +79,7 @@ public class VirtualMachine extends AbstractComponent {
 			q.localPublishPort();
 			this.listeCoeurs.add(q);
 		}
-		System.out.println("Machine virtuelle "+ mvUri+ " crï¿½ï¿½e.");
+		System.out.println("Machine virtuelle "+ mvUri+ " créée.");
 
 	}
 
