@@ -10,8 +10,8 @@ import fr.upmc.components.connectors.AbstractConnector;
 public class ComputerConnector extends AbstractConnector implements ComputerI{
 
 	@Override
-	public void setAvailableCore(String uriCore, boolean b) throws RemoteException {
-		((ComputerI)this.offering).setAvailableCore(uriCore, b);
+	public void setCoreAvailability(String uriCore, boolean b) throws RemoteException {
+		((ComputerI)this.offering).setCoreAvailability(uriCore, b);
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public interface ComputerI extends OfferedI{
 	 * @param uriCore uri du Coeur
 	 * @param b booléen de la disponibilité
 	 */
-	public void setAvailableCore(String uriCore, boolean b) throws RemoteException;
+	public void setCoreAvailability(String uriCore, boolean b) throws RemoteException;
 
 	/** Fonction retournant la liste des uri des coeurs disponibles dans l'ordinateur
 	 * @return liste des uri des coeurs disponibles

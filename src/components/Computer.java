@@ -98,13 +98,13 @@ public class Computer extends AbstractComponent implements ComputerI {
 
 	/** Fonction permettant de mettre un coeur occupé par une machine virtuelle ou non
 	 * @param uriCore String uri du coeur
-	 * @param boolean disponibilité du coeur
+	 * @param boolean disponibilité du coeur. True s'il est occupé, false sinon.
 	 */
-	public void setAvailableCore(String uriCore, boolean b){
+	public void setCoreAvailability(String uriCore, boolean b){
 		Core c;
 		for(int i=0;i<this.cores.size();i++){
 			c=this.cores.get(i);
-			if(c.getUri()==uriCore){
+			if(c.getUri().compareTo(uriCore)==0){
 				c.setUsedByVM(b);
 			}
 		}

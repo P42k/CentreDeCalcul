@@ -25,9 +25,9 @@ public class ComputerInboundPort  extends AbstractInboundPort implements Compute
 	
 	/** Appelle la méthode setAvailableCore du composant Ordinateur */
 	@Override
-	public void setAvailableCore(String uriCore, boolean b) throws RemoteException{
+	public void setCoreAvailability(String uriCore, boolean b) throws RemoteException{
 		final Computer c = (Computer)  this.owner;
-		c.setAvailableCore(uriCore, b);
+		c.setCoreAvailability(uriCore, b);
 	}
 
 	/** Appelle la méthode getAvailableCores du composant Ordinateur */

@@ -24,8 +24,8 @@ public class CalculCenter extends AbstractComponent{
 	
 	public void start() throws ComponentStartException{
 		super.start();
-		comp.start();
-		ac.start();
+//		comp.start();
+//		ac.start();
 	}
 
 	public String getAdmissionControllerURI() {
