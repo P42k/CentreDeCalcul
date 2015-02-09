@@ -25,7 +25,7 @@ public class AdmissionControllerInboundPort extends AbstractInboundPort implemen
 				new ComponentService<String>() {
 					@Override
 					public String call() throws Exception {
-						return ac.accept(requestGeneratorId) ;
+						return ac.accept(requestGeneratorId);
 					}
 				});
 	}

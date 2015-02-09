@@ -24,6 +24,7 @@ public class AdmissionController extends AbstractComponent{
 		super(true,true);
 		this.toggleTracing();
 		applicationId = 0;
+		this.listeApplication= new ArrayList<RequestRepartitor>();
 		//addofferedInterface pour le centre de calcul et le RG, création de port, addport, localpublishport
 		addOfferedInterface(AdmissionControllerI.class);
 		try {
