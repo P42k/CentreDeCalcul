@@ -56,6 +56,9 @@ public class PerformanceController extends AbstractComponent {
 		this.addRequiredInterface(CoreI.class);
 	}
 	
+	/**
+	 * Permet la connexion avec les coeurs
+	 */
 	public void start() throws ComponentStartException{
 		//faire la connexion entre le composant et les coeurs
 		super.start();
@@ -70,7 +73,8 @@ public class PerformanceController extends AbstractComponent {
 	}
 	
 	/**
-	 * méthode qui va s'appeler récursivement
+	 * méthode qui va s'appeler récursivement pour vérifier la fréquence et permettre son changement
+	 * en fonction de seuil et par rapport au temps moyen de process calculé dans le générateur
 	 */
 	public void checkFreq(){
 		//this.meanProcessingTime=?

@@ -8,7 +8,11 @@ import interfaces.ComputerI;
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ports.AbstractInboundPort;
 
-/**Inbound port du composant Ordinateur */
+/**Inbound port du composant Ordinateur
+ * 
+ * @author Argonautes
+ *
+ */
 
 public class ComputerInboundPort  extends AbstractInboundPort implements ComputerI{
 

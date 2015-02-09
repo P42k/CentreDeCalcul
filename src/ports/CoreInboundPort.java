@@ -8,7 +8,11 @@ import interfaces.CoreI;
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ports.AbstractInboundPort;
 
-/** InboundPort du composant Coeur */
+/** InboundPort du composant Coeur
+ * 
+ * @author Argonautes
+ *
+ */
 public class CoreInboundPort extends AbstractInboundPort implements CoreI {
 
 	/** Crée le port avec une certaine uri et un certain owner */

@@ -6,7 +6,11 @@ import ressources.Request;
 import interfaces.CoreI;
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ports.AbstractOutboundPort;
-
+/**
+ * Outbound port du performance controller
+ * @author Argonautes
+ *
+ */
 public class PerformanceControllerOutboundPort extends AbstractOutboundPort implements CoreI{
 
 	public PerformanceControllerOutboundPort(String uri,

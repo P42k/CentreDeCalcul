@@ -12,14 +12,30 @@ import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.exceptions.ComponentStartException;
 import fr.upmc.components.ports.PortI;
 
+/**
+ * Composant Admission Controller. Il permet de créer les applications et les machines virtuelles.
+ * @author Argonautes
+ *
+ */
 public class AdmissionController extends AbstractComponent{
-	//public static final String admissionControllerURI = "admission-controller-URI";
+	
+	/** Liste des machines virtuelles */
 	private ArrayList<VirtualMachine> listeMV;
+	/** Liste des ordinateurs */
 	private ArrayList<String> listeComputer;
+	/** Liste des applications (répartiteurs de requêtes)*/
 	private ArrayList<RequestRepartitor> listeApplication;
+	/** Liste des ports outbound de l'admission controller */
 	private ArrayList<AdmissionControllerOutboundPort> cop;
+	
 	private int applicationId;
 	
+	/** crée un Admission Controller
+	 * 
+	 * @param admissionControllerURI String uri de l'admission controller
+	 * @param uriComputer liste des uri des orinateurs du centre de calcul
+	 * @throws Exception
+	 */
 	public AdmissionController(String admissionControllerURI, ArrayList<String> uriComputer) throws Exception{
 		super(true,true);
 		this.toggleTracing();
@@ -47,6 +63,9 @@ public class AdmissionController extends AbstractComponent{
 		System.out.println("Admission controller créé.");
 	}
 	
+	/**
+	 * Méthode start permettant la connexion avec les ordinateurs
+	 */
 	public void start() throws ComponentStartException{
 		super.start();
 		for(int i=0; i<listeComputer.size();i++){
@@ -67,7 +86,7 @@ public class AdmissionController extends AbstractComponent{
 	
 	
 	/***
-	 * 
+	 * Crée une application (le répartiteur de requête)
 	 * @param RequestGeneratorID
 	 * @return uri de l'application
 	 * @throws Exception

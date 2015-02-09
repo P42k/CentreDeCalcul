@@ -6,7 +6,11 @@ import components.VirtualMachine;
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ports.AbstractInboundPort;
 
-/** Inbound port du composant machine virtuelle */
+/** Inbound port du composant machine virtuelle
+ * 
+ * @author Argonautes
+ *
+ */
 public class VirtualMachineInboundPort extends AbstractInboundPort implements VirtualMachineI {
 
 	private static final long serialVersionUID = 1L;

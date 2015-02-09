@@ -1,6 +1,10 @@
 package ressources;
 
-/** Enumération des fréquences possibles pour les coeurs */
+/** Enumération des fréquences possibles pour les coeurs 
+ * 
+ * @author Argonautes
+ *
+ */
 public enum Frequence {
 	F14(1.4),
 	F16(1.6),

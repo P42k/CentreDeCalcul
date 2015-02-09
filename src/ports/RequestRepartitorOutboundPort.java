@@ -6,7 +6,11 @@ import ressources.Request;
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ports.AbstractOutboundPort;
 import interfaces.VirtualMachineI;
-
+/**
+ * Outbound port du répartiteur de quêtes
+ * @author Argonautes
+ *
+ */
 public class RequestRepartitorOutboundPort extends AbstractOutboundPort implements VirtualMachineI {
 
 	public RequestRepartitorOutboundPort(String uri, ComponentI owner) throws Exception {

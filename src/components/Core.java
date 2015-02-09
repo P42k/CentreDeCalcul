@@ -9,6 +9,11 @@ import ressources.Request;
 import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.exceptions.ComponentStartException;
 
+/**
+ * Composant simulant un coeur
+ * @author Argonautes
+ *
+ */
 public class Core extends AbstractComponent implements CoreI{
 	// -------------------------------------------------------------------------
 	// Constructors and instance variables

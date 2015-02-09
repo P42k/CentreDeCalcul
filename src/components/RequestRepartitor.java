@@ -28,7 +28,6 @@ public class RequestRepartitor extends AbstractComponent {
 	 * @param ArrayList
 	 * @param uriMVs
 	 * @throws Exception
-	 * @pre 	uriApplication != null && uriMVs !=null
 	 * 
 	 */
 	public RequestRepartitor(String uriApplication,ArrayList<String> uriMVs) throws Exception{

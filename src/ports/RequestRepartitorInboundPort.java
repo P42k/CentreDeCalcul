@@ -7,7 +7,11 @@ import components.RequestRepartitor;
 
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ports.AbstractInboundPort;
-/** Inbound port du répartiteur de requete */
+/** Inbound port du répartiteur de requete
+ * 
+ * @author Argonautes
+ *
+ */
 public class RequestRepartitorInboundPort extends AbstractInboundPort implements RequestRepartitorI{
 
 	/**

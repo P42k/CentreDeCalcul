@@ -23,15 +23,15 @@ import fr.upmc.components.ports.PortI;
 // SingleServerEventBasedSimulation
 
 public class VirtualMachine extends AbstractComponent {
-	/** Liste des ports de la VM connectï¿½ aux coeurs						*/
+	/** Liste des ports de la VM connectées aux coeurs						*/
 	private ArrayList<VirtualMachineOutboundPort> listeCoeurs;
 	/** Uri de l'application en cours sur la VM 					*/
 	private String idApplication;
 	/**Liste des URIs des coeurs avec lesquels la MV va communiquer			*/
 	private ArrayList<String> listeURICoeur;
-	/** La file des requï¿½tes en attente de traitement 						*/
+	/** La file des requêtes en attente de traitement 						*/
 	protected BlockingQueue<Request> requestsQueue;
-	/** la liste des ï¿½tats des coeurs */
+	/** la liste des états des coeurs */
 	private ArrayList<CoreStatus> ce;
 	/** Uri de la machine virtuelle */
 	private String mvUri;
@@ -47,11 +47,11 @@ public class VirtualMachine extends AbstractComponent {
 	}
 
 	/**
-	 * Crï¿½e une machine virtuelle
+	 * Crée une machine virtuelle
 	 * @param listeURICoeur liste des uris des coeurs
 	 * @param idApp identifiant de l'application
 	 * @param MVPortURI uri du port de la machine virtuelle
-	 * @param isDistributed boolï¿½en dï¿½finissant si la machine virtuelle est distribuï¿½e
+	 * @param isDistributed booléen définissant si la machine virtuelle est distribuée
 	 * @throws Exception
 	 */
 	public VirtualMachine(ArrayList<String> listeURICoeur, String idApp, String MVPortURI,
@@ -84,8 +84,8 @@ public class VirtualMachine extends AbstractComponent {
 	}
 
 	/**
-	 * rajoute la requï¿½te dans la file d'attente et traite la requï¿½te en faisant appel ï¿½ un coeur libre
-	 * @param requete la requï¿½te qui arrive ï¿½ la machine virtuelle
+	 * rajoute la requête dans la file d'attente et traite la requête en faisant appel à un coeur libre
+	 * @param requete la requête qui arrive à la machine virtuelle
 	 * @throws Exception
 	 */
 	public void traitementRequete(Request requete) throws Exception{
@@ -128,8 +128,8 @@ public class VirtualMachine extends AbstractComponent {
 	}
 
 	/**
-	 * Sert ï¿½ effectuer la connexion des ports recquis 
-	 * au dï¿½marrage du centre de calcul
+	 * Sert à effectuer la connexion des ports recquis 
+	 * au démarrage du centre de calcul
 	 */
 	@Override
 	public void start() throws ComponentStartException{
@@ -148,7 +148,7 @@ public class VirtualMachine extends AbstractComponent {
 	}
 
 	/**
-	 * Arrï¿½te la Machine Virtuelle
+	 * Arrête la Machine Virtuelle
 	 */
 	public void shutdown() throws ComponentShutdownException{
 		// voir ce qu'on fait lï¿½
@@ -156,15 +156,15 @@ public class VirtualMachine extends AbstractComponent {
 	}
 
 	/**
-	 * Rï¿½cupï¿½re l'id de l'application ï¿½ qui a ï¿½tï¿½ allouï¿½e la machine virtuelle
-	 * @return uri de l'applicaton ï¿½ qui a ï¿½tï¿½ allouï¿½e la MV
+	 * Récupère l'id de l'application à qui a été allouée la machine virtuelle
+	 * @return uri de l'applicaton à qui a été allouée la MV
 	 */
 	public String getIdApplication() {
 		return idApplication;
 	}
 
 	/**
-	 * Met ï¿½ jour l'id de l'appli ï¿½ qui est allouï¿½e la MV
+	 * Met à jour l'id de l'appli àqui est allouée la MV
 	 * @param idApplication uri de l'application
 	 */
 	public void setIdApplication(String idApplication) {

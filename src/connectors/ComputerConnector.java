@@ -6,7 +6,12 @@ import java.util.ArrayList;
 import interfaces.ComputerI;
 import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.connectors.AbstractConnector;
-
+/**
+ * La classe <code>ComputerConnector</code> implémente un connecteur entre
+ * les interfaces <code>AdmissionControllerI</code> et <code>ComputerI</code>.
+ * @author Argonautes
+ *
+ */
 public class ComputerConnector extends AbstractConnector implements ComputerI{
 
 	@Override

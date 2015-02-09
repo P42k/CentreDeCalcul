@@ -6,5 +6,11 @@ import ressources.Request;
 
 public interface RequestRepartitorI extends OfferedI, RequiredI {
 
+	/**
+	 * Répartit les requetes aux machines virtuelles
+	 * @param requete
+	 * @throws Exception
+	 * @pre    requete !=null
+	 */
 	public void repartition(Request request) throws Exception;
 }

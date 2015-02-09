@@ -11,7 +11,11 @@ import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.exceptions.ComponentStartException;
 import fr.upmc.components.ports.PortI;
 
-/** Composant simulant une machine physique */
+/** Composant simulant une machine physique
+ * 
+ * @author Argonautes
+ *
+ */
 
 public class Computer extends AbstractComponent implements ComputerI {
 	/** Liste des coeurs de l'ordinateur */

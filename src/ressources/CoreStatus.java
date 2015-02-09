@@ -4,6 +4,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import ports.VirtualMachineOutboundPort;
 
+/**
+ * Thread statut du coeur, s'il exécute une requête ou non
+ * @author Julia
+ *
+ */
 public class CoreStatus extends Thread{
 	/**le port qui va demander le traitement sur le coeur libre*/
 	private VirtualMachineOutboundPort vmop;

@@ -18,7 +18,13 @@ import fr.upmc.components.AbstractComponent;
 import fr.upmc.components.exceptions.ComponentShutdownException;
 import fr.upmc.components.exceptions.ComponentStartException;
 
+/**
+ * Composant générateur de requêtes 
+ * @author Argonautes
+ *
+ */
 public class RequestGenerator extends AbstractComponent {
+	
 	protected RandomDataGenerator rng;
 	protected int counter;
 	protected double meanInterArrivalTime;
@@ -32,7 +38,16 @@ public class RequestGenerator extends AbstractComponent {
 	protected String requestGeneratorOutboundURI;
 	protected boolean isFinish;
 	private int maxRequest;
-
+	/** 
+	 * Crée un générateur de requêtes
+	 * 
+	 * @param meanInterArrivalTime temps moyen d'arrivée 
+	 * @param meanProcessingTime temps moyen de process
+	 * @param requestGeneratorId id du générateur
+	 * @param admissionControllerInboundURI string uri du inbound port de l'admission controller
+	 * @param requestGeneratorOutboundURI string  uri de l'outbound port du générateur
+	 * @throws Exception
+	 */
 	public RequestGenerator(double meanInterArrivalTime,
 			double meanProcessingTime, int requestGeneratorId,
 			String admissionControllerInboundURI,
@@ -61,6 +76,9 @@ public class RequestGenerator extends AbstractComponent {
 		System.out.println("Générateur de requête créé.");
 	}
 
+	/**
+	 * Méthode start permettant la connexion avec le contrôleur d'admission et le répartiteur de requête
+	 */
 	@Override
 	public void start() throws ComponentStartException {
 		super.start();
@@ -113,6 +131,9 @@ public class RequestGenerator extends AbstractComponent {
 		}, 1000, TimeUnit.MILLISECONDS);
 	}
 
+	/**
+	 * Méthode de shutdown du composant générateur de requêtes
+	 */
 	@Override
 	public void shutdown() throws ComponentShutdownException {
 		if (this.nextRequestTaskFuture != null
@@ -123,6 +144,10 @@ public class RequestGenerator extends AbstractComponent {
 		super.shutdown();
 	}
 
+	/**
+	 * Permet de générer la prochaine requête, fait appel à la répartition du répartiteur de requêtes lié
+	 * @throws Exception
+	 */
 	public void generateNextRequest() throws Exception {
 		// System.out.println("Génération d'une nouvelle requête!");
 		long processingTime = (long) this.rng

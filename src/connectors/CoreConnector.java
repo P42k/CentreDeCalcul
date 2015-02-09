@@ -10,7 +10,9 @@ import fr.upmc.components.connectors.AbstractConnector;
 /**
  * La classe <code>VMCoreConnector</code> implémente un connecteur entre
  * les interfaces <code>VirtualMachineI</code> et <code>CoreI</code>.
+ * @author Argonautes
  */
+
 public class CoreConnector extends AbstractConnector implements CoreI{
 
 	/**

@@ -5,7 +5,11 @@ import interfaces.AdmissionControllerI;
 import fr.upmc.components.ComponentI;
 import fr.upmc.components.ComponentI.ComponentService;
 import fr.upmc.components.ports.AbstractInboundPort;
-
+/**
+ * Inbound port de l'admission controller
+ * @author Argonautes
+ *
+ */
 public class AdmissionControllerInboundPort extends AbstractInboundPort implements AdmissionControllerI{
 
 	public AdmissionControllerInboundPort(String uri, ComponentI owner) throws Exception {
